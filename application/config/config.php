@@ -48,7 +48,34 @@ $config['index_page'] = 'index.php';
 |
 */
 $config['auth'] = [
-    'user' => [
+    'admin' => [
+        'table'     => 'users',
+        'login'     => 'email',
+        'password'  => 'password',
+        'encoding'  => 'bcrypt'
+    ]
+];
+
+$config['auth'] = [
+    'famille' => [
+        'table'     => 'users',
+        'login'     => 'email',
+        'password'  => 'password',
+        'encoding'  => 'bcrypt'
+    ]
+];
+
+$config['auth'] = [
+    'eleve' => [
+        'table'     => 'users',
+        'login'     => 'email',
+        'password'  => 'password',
+        'encoding'  => 'bcrypt'
+    ]
+];
+
+$config['auth'] = [
+    'enseignant' => [
         'table'     => 'users',
         'login'     => 'email',
         'password'  => 'password',

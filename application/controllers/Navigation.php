@@ -4,16 +4,19 @@ class Navigation extends CI_Controller
 {
     public function index()
     {
-        if ($this->session->connected == false) {
-            redirect(site_url('Navigation/connection'));
-        }
-
         $this->load->view('header');
         $this->load->view('welcome_message');
         $this->load->view('footer');
     }
 
-    public function inscription()
+    public function contact()
+    {
+        $this->load->view('header');
+        $this->load->view('contact');
+        $this->load->view('footer');
+    }
+
+    public function register()
     {
         $this->load->view('header');
 
@@ -27,18 +30,18 @@ class Navigation extends CI_Controller
             if ($this->form_validation->run()) {
                 $this->load->model('user_model');
                 $post['password'] = $this->auth->crypt_password($post['password']);
-                $post['type'] = 'user';
+                $post['type'] = 'famille';
                 $this->user_model->add($post);
-                echo '<h2 class="text-center text-success mt-5">Inscription validée</h2>';
+                echo '<h2 class="text-center text-success mt-5">Inscription de la famille validée</h2>';
                 header('refresh:1;'. site_url("Navigation/connection"));
             }
         }
 
-        $this->load->view('inscription');
+        $this->load->view('register');
         $this->load->view('footer');
     }
 
-    public function connection()
+    public function login()
     {
         $this->load->view('header');
 
@@ -53,7 +56,7 @@ class Navigation extends CI_Controller
                 $email = $this->input->post("email");
                 $password = $this->input->post("password");
 
-                if ($this->auth->login($email, $password, "user")) {
+                if ($this->auth->login($email, $password, "famille")) {
                     $this->session->connected = true;
                     $this->session->user_type = $this->session->user['type'];
                     echo '<h2 class="text-center text-success mt-5">Connexion réussie</h2>';
@@ -63,7 +66,7 @@ class Navigation extends CI_Controller
                 }
             }
         }
-        $this->load->view('connection');
+        $this->load->view('login');
         $this->load->view('footer');
     }
 
