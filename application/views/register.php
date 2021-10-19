@@ -105,7 +105,7 @@
                     </div>
                 </div>
 
-                <p class="box-register p-3 rounded mx-auto">Déjà inscrit ? <a href="<?= site_url('navigation/login')?>">Connectez-vous ici</a></p>
+                <p class="box-register p-3 rounded mx-auto">Déjà inscrit ? <a href="<?= site_url('login')?>">Connectez-vous ici</a></p>
                 <?php if (!empty($errorMsg)) { ?>
                     <p class="text-center text-danger"><?php echo $errorMsg; ?></p>
                 <?php } ?>

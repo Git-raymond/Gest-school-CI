@@ -47,32 +47,32 @@ $config['index_page'] = 'index.php';
 | variable so that it is blank.
 |
 */
-$config['auth'] = [
-    'admin' => [
-        'table'     => 'comptes',
-        'login'     => 'email',
-        'password'  => 'password',
-        'encoding'  => 'bcrypt'
-    ],
-    'famille' => [
-        'table'     => 'comptes',
-        'login'     => 'email',
-        'password'  => 'password',
-        'encoding'  => 'bcrypt'
-    ],
-    'eleve' => [
-        'table'     => 'comptes',
-        'login'     => 'email',
-        'password'  => 'password',
-        'encoding'  => 'bcrypt'
-    ],
-    'enseignant' => [
-        'table'     => 'comptes',
-        'login'     => 'email',
-        'password'  => 'password',
-        'encoding'  => 'bcrypt'
-    ]
-];
+// $config['auth'] = [
+//     'admin' => [
+//         'table'     => 'comptes',
+//         'login'     => 'email',
+//         'password'  => 'password',
+//         'encoding'  => 'bcrypt'
+//     ],
+//     'famille' => [
+//         'table'     => 'comptes',
+//         'login'     => 'email',
+//         'password'  => 'password',
+//         'encoding'  => 'bcrypt'
+//     ],
+//     'eleve' => [
+//         'table'     => 'comptes',
+//         'login'     => 'email',
+//         'password'  => 'password',
+//         'encoding'  => 'bcrypt'
+//     ],
+//     'enseignant' => [
+//         'table'     => 'comptes',
+//         'login'     => 'email',
+//         'password'  => 'password',
+//         'encoding'  => 'bcrypt'
+//     ]
+// ];
 
 
 /*

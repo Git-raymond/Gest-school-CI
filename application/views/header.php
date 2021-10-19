@@ -50,31 +50,31 @@
       <?php
       if (isset($_SESSION['type'])) {
 
-        if ($_SESSION['type'] == 'admin') {
-          echo "<a href='" . site_url('navigation/indexadmin/') . "'><i class='fas fa-tools'></i>Espace Admin</a>";
-          echo "<a href='" . site_url('navigation/stats/') . "'><i class='fas fa-database'></i>Statistiques</a>";
+        if($this->session->userdata('type')==='admin') {
+          echo "<a href='" . site_url('page/indexadmin/') . "'><i class='fas fa-tools'></i>Espace Admin</a>";
+          echo "<a href='" . site_url('page/stats/') . "'><i class='fas fa-database'></i>Statistiques</a>";
         }
 
-        if ($this->session->connected == true) {
-          echo "<a href='" . site_url("Navigation/indexfamille") . "'><i class='fas fa-users'></i>Espace Famille</a>";
+        if($this->session->userdata('type')==='famille') {
+          echo "<a href='" . site_url("page/indexfamille") . "'><i class='fas fa-users'></i>Espace Famille</a>";
 
           echo "<nav id='navbar' class='navbar'></i><div class='dropdown'>
 			<a class='btn text-primary dropdown-toggle' href='#' role='button' id='dropdownMenuLink1' data-bs-toggle='dropdown' aria-expanded='false'><i class='fas fa-users'></i>
 				Comptes des élèves de la famille
 			</a><ul class='dropdown-menu' aria-labelledby='dropdownMenuLink'>";
-          echo "<li><a class='dropdown-item' href='rechercheelevefamille.php'>Recherche des élèves de la famille</a></li>";
-          echo "<li><a class='dropdown-item' href='ajoutelevefamille.php'>Ajouter un élève à la famille</a></li>";
-          echo "<li><a class='dropdown-item' href='listeeleveattentefamille.php'>Liste des élèves en attente de scolarisation</a></li>";
-          echo "<li><a class='dropdown-item' href='listeelevefamille.php'>Liste des élèves scolarisés de la famille</a></li></ul></div>";
+          echo "<li><a class='dropdown-item' href='" . site_url('page/rechercheelevefamille/') . "'>Recherche des élèves de la famille</a></li>";
+          echo "<li><a class='dropdown-item' href='" . site_url('page/ajoutelevefamille/') . "'>Ajouter un élève à la famille</a></li>";
+          echo "<li><a class='dropdown-item' href='" . site_url('page/listeeleveattentefamille/') . "'>Liste des élèves en attente de scolarisation</a></li>";
+          echo "<li><a class='dropdown-item' href='" . site_url('page/listeelevefamille/') . "'>Liste des élèves scolarisés de la famille</a></li></ul></div>";
         }
 
-        if ($_SESSION['type'] == 'eleve') {
-          echo "<a href='indexeleve.php'><i class='fas fa-user-graduate'></i>Espace Elève</a>";
+        if($this->session->userdata('type')==='eleve') {
+          echo "<a href='" . site_url('page/indexeleve/') . "'><i class='fas fa-user-graduate'></i>Espace Elève</a>";
           echo " 
 			<nav id='navbar' class='navbar'>		
-			<a href='index.php'><i class='fas fa-home'></i>Accueil</a>
+			<a href='" . base_url('index.php') . "'><i class='fas fa-home'></i>Accueil</a>
         	<i class='bi bi-list mobile-nav-toggle'></i>
-				<a href='logout.php'>Déconnexion</a>
+				<a href='" . site_url("login/logout") . "'>Déconnexion</a>
 			</ul>
 		</div>
 		</nav>
@@ -83,20 +83,20 @@
 		";
         }
 
-        if ($_SESSION['type'] == 'enseignant') {
+        if($this->session->userdata('type')==='enseignant') {
           echo "<a href='indexenseignant.php'><i class='fas fa-chalkboard-teacher'></i>Espace Enseignant</a>";
 
           echo "<nav id='navbar' class='navbar'></i><div class='dropdown'>
 			<a class='btn text-primary dropdown-toggle' href='#' role='button' id='dropdownMenuLink1' data-bs-toggle='dropdown' aria-expanded='false'><i class='fas fa-chalkboard'></i>
 				Elèves suivant le cursus de formation de l'enseignant
 			</a><ul class='dropdown-menu' aria-labelledby='dropdownMenuLink'>";
-          echo "<li><a class='dropdown-item' href='rechercheelevecursusprof.php'>Recherche des élèves inscrits au cursus</a></li>";
-          echo "<li><a class='dropdown-item' href='listeelevecursusprof.php'>Liste des élèves inscrits au cursus</a></li>";
-          echo "<li><a class='dropdown-item' href='listecursusprof.php'>Liste des cursus de formation attribués à l'enseignant</a></li></ul></div>";
+          echo "<li><a class='dropdown-item' href='" . site_url('page/rechercheelevecursusprof/') . "'>Recherche des élèves inscrits au cursus</a></li>";
+          echo "<li><a class='dropdown-item' href='" . site_url('page/listeelevecursusprof/') . "'>Liste des élèves inscrits au cursus</a></li>";
+          echo "<li><a class='dropdown-item' href='" . site_url('page/listecursusprof/') . "'>Liste des cursus de formation attribués à l'enseignant</a></li></ul></div>";
           echo " 
-			<a href='index.php'><i class='fas fa-home'></i>Accueil</a>
+			<a href='" . base_url('index.php') . "'><i class='fas fa-home'></i>Accueil</a>
         	<i class='bi bi-list mobile-nav-toggle'></i>
-				<a href='logout.php'>Déconnexion</a>
+				<a href='" . site_url("login/logout") . "'>Déconnexion</a>
 			</ul>
 			</div>
 			</nav>
@@ -105,11 +105,11 @@
 			";
         }
 
-        if ($_SESSION['type'] == 'admin' or $_SESSION['type'] == 'famille') {
-          $idEdit = $_SESSION['id'];
+        if($this->session->userdata('type')==='admin' or $this->session->userdata('type')==='famille') {
+          $idEdit = $this->session->userdata('id');
           echo " 
 			<nav id='navbar' class='navbar'>		
-			<a href='index.php'><i class='fas fa-home'></i>Accueil</a>
+			<a href='" . base_url('index.php') . "'><i class='fas fa-home'></i>Accueil</a>
         	<i class='bi bi-list mobile-nav-toggle'></i>
 			<div class='dropdown'>
 		<a class='btn text-primary dropdown-toggle' href='#' role='button' id='dropdownMenuLink' data-bs-toggle='dropdown' aria-expanded='false'><i class='fas fa-user'></i>
@@ -117,7 +117,7 @@
 		</a>
 		<ul class='dropdown-menu' aria-labelledby='dropdownMenuLink'>
 			<li><a class='dropdown-item' href='editcompte.php?id=" . $idEdit . "'>Modifier mon compte</a></li>
-			<li><a class='dropdown-item' href='logout.php'>Déconnexion</a></li>
+			<li><a class='dropdown-item' href='" . site_url("login/logout") . "'>Déconnexion</a></li>
 			</ul>
 		</div>
 		</nav>
@@ -126,31 +126,31 @@
 		";
         }
 
-        if ($_SESSION['type'] == 'admin') {
+        if($this->session->userdata('type')==='admin') {
           echo "<nav id='navbar' class='navbar d-flex justify-content-center'>";
           echo "<div class='dropdown'>
 			<a class='btn text-primary dropdown-toggle' href='#' role='button' id='dropdownMenuLink1' data-bs-toggle='dropdown' aria-expanded='false'>
 				Comptes des enseignants
 			</a><ul class='dropdown-menu' aria-labelledby='dropdownMenuLink'>";
-          echo "<li><a class='dropdown-item' href='cursusenseignant.php'>Attribuer les cursus</a></li>";
-          echo "<li><a class='dropdown-item' href='rechercheprof.php'>Recherche des enseignants</a></li>";
-          echo "<li><a class='dropdown-item' href='ajoutprof.php'>Nouvel enseignant</a></li>";
-          echo "<li><a class='dropdown-item' href='listeprof.php'>Liste des enseignants</a></li></ul></div>";
+          echo "<li><a class='dropdown-item' href='" . site_url('page/cursusenseignant/') . "'>Attribuer les cursus</a></li>";
+          echo "<li><a class='dropdown-item' href='" . site_url('page/rechercheprof/') . "'>Recherche des enseignants</a></li>";
+          echo "<li><a class='dropdown-item' href='" . site_url('page/ajoutprof/') . "'>Nouvel enseignant</a></li>";
+          echo "<li><a class='dropdown-item' href='" . site_url('page/listeprof/') . "'>Liste des enseignants</a></li></ul></div>";
           echo "<div class='dropdown'>
 			<a class='btn text-primary dropdown-toggle' href='#' role='button' id='dropdownMenuLink1' data-bs-toggle='dropdown' aria-expanded='false'>
 				Cursus de formation
 			</a><ul class='dropdown-menu' aria-labelledby='dropdownMenuLink'>";
-          echo "<li><a class='dropdown-item' href='recherchecursus.php'>Recherche des cursus</a></li>";
-          echo "<li><a class='dropdown-item' href='ajoutcursus.php'>Nouveau cursus</a></li>";
-          echo "<li><a class='dropdown-item' href='listecursus.php'>Liste des cursus</a></li></ul></div>";
+          echo "<li><a class='dropdown-item' href='" . site_url('page/recherchecursus/') . "'>Recherche des cursus</a></li>";
+          echo "<li><a class='dropdown-item' href='" . site_url('page/ajoutcursus/') . "'>Nouveau cursus</a></li>";
+          echo "<li><a class='dropdown-item' href='" . site_url('page/listecursus/') . "'>Liste des cursus</a></li></ul></div>";
           echo "<div class='dropdown'>
 			<a class='btn text-primary dropdown-toggle' href='#' role='button' id='dropdownMenuLink1' data-bs-toggle='dropdown' aria-expanded='false'>
 				Comptes des élèves
 			</a><ul class='dropdown-menu' aria-labelledby='dropdownMenuLink'>";
-          echo "<li><a class='dropdown-item' href='cursuseleve.php'>Attribuer les cursus</a></li>";
-          echo "<li><a class='dropdown-item' href='rechercheeleve.php'>Recherche des élèves</a></li>";
-          echo "<li><a class='dropdown-item' href='listeelevecursus.php'>Liste des élèves avec cursus</a></li>";
-          echo "<li><a class='dropdown-item' href='listeelevesanscursus.php'>Liste des élèves sans cursus</a></li></ul></div>";
+          echo "<li><a class='dropdown-item' href='" . site_url('page/cursuseleve/') . "'>Attribuer les cursus</a></li>";
+          echo "<li><a class='dropdown-item' href='" . site_url('page/rechercheeleve/') . "'>Recherche des élèves</a></li>";
+          echo "<li><a class='dropdown-item' href='" . site_url('page/listeelevecursus/') . "'>Liste des élèves avec cursus</a></li>";
+          echo "<li><a class='dropdown-item' href='" . site_url('page/listeelevesanscursus/') . "'>Liste des élèves sans cursus</a></li></ul></div>";
           echo "</nav>";
         }
       } else {
@@ -162,8 +162,8 @@
       ?>
 
         <?php if ($this->session->connected == true) { ?>
-          <a href="<?= site_url('navigation/deconnection/'); ?>"><i class="fas fa-user"></i>Se déconnecter</a>
-        <?php } else { ?> <a href="<?= site_url('navigation/login/'); ?>"><i class="fas fa-user"></i>Se connecter</a><?php } ?>
+          <a href="<?= site_url('login/logout'); ?>"><i class="fas fa-user"></i>Se déconnecter</a>
+        <?php } else { ?> <a href="<?= site_url('login/'); ?>"><i class="fas fa-user"></i>Se connecter</a><?php } ?>
 
       <?php echo '<li><a href="' . site_url('navigation/contact/') . '"><i class="fas fa-envelope"></i>Contact</a></li>
         </ul>
