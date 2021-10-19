@@ -6,7 +6,7 @@
                 <br>
                 <div class="margin-input">
                     <input type="hidden" class="box-input mb-3 rounded" name="type" placeholder="famille" value="famille">
-                    <input type="hidden" class="box-input mb-3 rounded" name="famille" placeholder="famille" value="famille">
+                    <!-- <input type="hidden" class="box-input mb-3 rounded" name="famille" placeholder="famille" value="famille"> -->
                 </div>
                 <div class="margin-input">
                     <input type="text" class="box-input mb-3 rounded" name="username" placeholder="Nom de famille">
@@ -105,7 +105,7 @@
                     </div>
                 </div>
 
-                <p class="box-register p-3 rounded mx-auto">Déjà inscrit ? <a href="login.php">Connectez-vous ici</a></p>
+                <p class="box-register p-3 rounded mx-auto">Déjà inscrit ? <a href="<?= site_url('navigation/login')?>">Connectez-vous ici</a></p>
                 <?php if (!empty($errorMsg)) { ?>
                     <p class="text-center text-danger"><?php echo $errorMsg; ?></p>
                 <?php } ?>

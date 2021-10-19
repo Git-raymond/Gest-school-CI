@@ -49,39 +49,31 @@ $config['index_page'] = 'index.php';
 */
 $config['auth'] = [
     'admin' => [
-        'table'     => 'users',
+        'table'     => 'comptes',
         'login'     => 'email',
         'password'  => 'password',
         'encoding'  => 'bcrypt'
-    ]
-];
-
-$config['auth'] = [
+    ],
     'famille' => [
-        'table'     => 'users',
+        'table'     => 'comptes',
         'login'     => 'email',
         'password'  => 'password',
         'encoding'  => 'bcrypt'
-    ]
-];
-
-$config['auth'] = [
+    ],
     'eleve' => [
-        'table'     => 'users',
+        'table'     => 'comptes',
+        'login'     => 'email',
+        'password'  => 'password',
+        'encoding'  => 'bcrypt'
+    ],
+    'enseignant' => [
+        'table'     => 'comptes',
         'login'     => 'email',
         'password'  => 'password',
         'encoding'  => 'bcrypt'
     ]
 ];
 
-$config['auth'] = [
-    'enseignant' => [
-        'table'     => 'users',
-        'login'     => 'email',
-        'password'  => 'password',
-        'encoding'  => 'bcrypt'
-    ]
-];
 
 /*
 |--------------------------------------------------------------------------
@@ -567,6 +559,3 @@ $config['rewrite_short_tags'] = FALSE;
 | Array:		array('10.0.1.200', '192.168.5.0/24')
 */
 $config['proxy_ips'] = '';
-
-
-

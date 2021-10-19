@@ -16,14 +16,74 @@ class Navigation extends CI_Controller
         $this->load->view('footer');
     }
 
+    public function indexadmin()
+    {
+        // if ($this->session->connected == false) {
+        //     redirect(site_url('Navigation/login'));
+        // }
+        $this->auth->authorized(
+            ["admin"],
+            "Navigation/login"
+        );
+        // $this->output->enable_profiler(true);
+        $this->load->view('header');
+        $this->load->view('indexadmin');
+        $this->load->view('footer');
+    }
+
+    public function indexfamille()
+    {
+        $this->auth->authorized(
+            ["famille"],
+            "Navigation/login"
+        );
+        $this->load->view('header');
+        $this->load->view('indexfamille');
+        $this->load->view('footer');
+    }
+
+    public function indexeleve()
+    {
+        $this->auth->authorized(
+            ["eleve"],
+            "Navigation/login"
+        );
+        $this->load->view('header');
+        $this->load->view('indexeleve');
+        $this->load->view('footer');
+    }
+
+    public function indexenseignant()
+    {
+        $this->auth->authorized(
+            ["enseignant"],
+            "Navigation/login"
+        );
+        $this->load->view('header');
+        $this->load->view('indexenseignant');
+        $this->load->view('footer');
+    }
+
+    public function stats()
+    {
+        $this->auth->authorized(
+            ["admin"],
+            "Navigation/login"
+        );
+        $this->load->view('header');
+        $this->load->view('stats');
+        $this->load->view('footer');
+    }
+
     public function register()
     {
         $this->load->view('header');
 
         if ($this->input->post()) {
             $post = $this->input->post();
-            unset($post['btn_inscription']);
+            unset($post['valider']);
 
+            $this->form_validation->set_rules('username', 'username', 'required|alpha_numeric');
             $this->form_validation->set_rules('email', 'email', 'required|valid_email');
             $this->form_validation->set_rules('password', 'password', 'required|alpha_numeric');
 
@@ -33,7 +93,7 @@ class Navigation extends CI_Controller
                 $post['type'] = 'famille';
                 $this->user_model->add($post);
                 echo '<h2 class="text-center text-success mt-5">Inscription de la famille validée</h2>';
-                header('refresh:1;'. site_url("Navigation/connection"));
+                header('refresh:1;' . site_url("Navigation/login"));
             }
         }
 
@@ -47,7 +107,7 @@ class Navigation extends CI_Controller
 
         if ($this->input->post()) {
             $post = $this->input->post();
-            unset($post['btn_connection']);
+            unset($post['valider']);
 
             $this->form_validation->set_rules('email', 'email', 'required|valid_email');
             $this->form_validation->set_rules('password', 'password', 'required|alpha_numeric');
@@ -59,10 +119,26 @@ class Navigation extends CI_Controller
                 if ($this->auth->login($email, $password, "famille")) {
                     $this->session->connected = true;
                     $this->session->user_type = $this->session->user['type'];
-                    echo '<h2 class="text-center text-success mt-5">Connexion réussie</h2>';
-                    header('refresh:1;'. site_url("Navigation/index"));
+                    echo '<h2 class="text-center text-success mt-5">Connexion famille réussie</h2>';
+                    header('refresh:1;' . site_url("Navigation/indexfamille"));
+                } else if ($this->auth->login($email, $password, "admin")) {
+                    $this->session->connected = true;
+                    $this->session->user_type = $this->session->user['type'];
+                    echo '<h2 class="text-center text-success mt-5">Connexion admin réussie</h2>';
+                    header('refresh:1;' . site_url("Navigation/indexadmin"));
+                } else if ($this->auth->login($email, $password, "eleve")) {
+                    $this->session->connected = true;
+                    $this->session->user_type = $this->session->user['type'];
+                    echo '<h2 class="text-center text-success mt-5">Connexion élève réussie</h2>';
+                    header('refresh:1;' . site_url("Navigation/indexeleve"));
+                } else if ($this->auth->login($email, $password, "enseignant")) {
+                    $this->session->connected = true;
+                    $this->session->user_type = $this->session->user['type'];
+                    echo '<h2 class="text-center text-success mt-5">Connexion enseignant réussie</h2>';
+                    header('refresh:1;' . site_url("Navigation/indexenseignant"));
                 } else {
                     echo '<h2 class="text-center text-danger mt-5">Connection refusée , l\'adresse ou le mot de passe est incorrect</h2>';
+                    header('refresh:1;' . site_url("Navigation/login"));
                 }
             }
         }
@@ -73,7 +149,7 @@ class Navigation extends CI_Controller
     public function deconnection()
     {
         $this->auth->logout(true);
-        redirect(site_url("Navigation/connection"));
+        redirect(site_url("Navigation/login"));
     }
 
     public function welcome_message()
@@ -83,23 +159,23 @@ class Navigation extends CI_Controller
         $this->load->view('footer');
     }
 
-    public function images()
-    {
-        if ($this->session->connected == false) {
-            redirect(site_url('Navigation/connection'));
-        }
-        $this->load->view('header');
-        $this->load->view('images');
-        $this->load->view('footer');
-    }
+    // public function images()
+    // {
+    //     if ($this->session->connected == false) {
+    //         redirect(site_url('Navigation/connection'));
+    //     }
+    //     $this->load->view('header');
+    //     $this->load->view('images');
+    //     $this->load->view('footer');
+    // }
 
-    public function video()
-    {
-        if ($this->session->connected == false) {
-            redirect(site_url('Navigation/connection'));
-        }
-        $this->load->view('header');
-        $this->load->view('video');
-        $this->load->view('footer');
-    }
+    // public function video()
+    // {
+    //     if ($this->session->connected == false) {
+    //         redirect(site_url('Navigation/connection'));
+    //     }
+    //     $this->load->view('header');
+    //     $this->load->view('video');
+    //     $this->load->view('footer');
+    // }
 }

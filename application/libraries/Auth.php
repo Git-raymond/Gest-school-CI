@@ -234,7 +234,7 @@ class Auth
         $data = $query->row_array();
         if ($data){
             if ($this->check_password($password, $data[$this->get_conf($type, Auth::PASSWORD)], $type)){
-            return $data;
+                return $data;
             }
         }
         return NULL;
@@ -262,9 +262,6 @@ class Auth
         }
     }
 
-    public function crypt_password($input_password) {
-        return password_hash($input_password, PASSWORD_DEFAULT);
-    }
 
     /**
      * Return the configuration for the type and item name
