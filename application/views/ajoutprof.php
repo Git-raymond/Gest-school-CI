@@ -1,8 +1,4 @@
-<?php
-include 'functions.php';
-session_start();
-?>
-<?= template_header('Ajout enseignant') ?>
+
 
 <?php
 if (!isset($_SESSION['type'])) {

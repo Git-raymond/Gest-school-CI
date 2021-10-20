@@ -4,6 +4,7 @@ class Page extends CI_Controller
     function __construct()
     {
         parent::__construct();
+        $this->load->helper('url_helper');
         if ($this->session->userdata('logged_in') !== TRUE) {
             redirect('login');
         }
@@ -14,17 +15,6 @@ class Page extends CI_Controller
         if ($this->session->userdata('type') === 'admin') {
             $this->load->view('header');
             $this->load->view('dashboard_view');
-            $this->load->view('footer');
-        } else {
-            echo "Access Denied";
-        }
-    }
-
-    function stats()
-    {
-        if ($this->session->userdata('type') === 'admin') {
-            $this->load->view('header');
-            $this->load->view('stats');
             $this->load->view('footer');
         } else {
             echo "Access Denied";
@@ -63,4 +53,47 @@ class Page extends CI_Controller
             echo "Access Denied";
         }
     }
+
+
+    public function stats()
+    {
+        if ($this->session->userdata('type') === 'admin') {
+
+            $this->load->model('Stats_model');
+
+            $data['nombreFamilles'] = $this->Stats_model->nombrefamilles();
+            $data['listeFamilles'] = $this->Stats_model->listefamilles();
+            $data['profils'] = $this->Stats_model->listeprofil();
+            $data['profs'] = $this->Stats_model->listeenseignantcursus();
+
+            $this->load->view('header');
+            $this->load->view('stats', $data);
+            $this->load->view('footer');
+        } else {
+            echo "Access Denied";
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
