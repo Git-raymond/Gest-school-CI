@@ -84,16 +84,66 @@ class Page_model extends CI_Model
         return $this->db->get_where('cursus', array('idCursus' => $cursus))->row();
     }
 
-    public function updatecursus($id, $data) {
+    public function updatecursus($id, $data)
+    {
         $this->load->database();
         $this->db->where('idCursus', $id);
         $this->db->update('cursus', $data);
     }
 
-    public function removecursus($id) {
+    public function removecursus($id)
+    {
         $this->load->database();
         $this->load->helper('url');
         $this->db->where('idCursus', $id);
         $this->db->delete('cursus');
+    }
+
+    public function listeeleves()
+    {
+        $requete = $this->db->query("SELECT * FROM comptes WHERE type='eleve'");
+        $listeeleves = $requete->result();
+        return $listeeleves;
+    }
+
+    public function attribuecursuseleve($ide, $cur)
+    {
+        if ($this->input->post('btn_update')) {
+
+            $data = array(
+                'cursus_id' => $cur
+            );
+
+            $this->db->where('idEleve', $ide)
+                ->update('eleve', $data);
+        
+            echo '<h1 class="text-center text-success">Le cursus a bien été attribué</h1>';
+        }
+    }
+
+    public function rechercheeleve()
+    {
+        if ($this->input->post('recherche')) {
+
+            $recherche = $this->input->post('recherche');
+
+            $requete = $this->db->query("SELECT username, email, status FROM comptes WHERE type='eleve' AND username LIKE '%$recherche%' OR type='eleve' AND email LIKE '%$recherche%' OR type='eleve' AND status LIKE '%$recherche%'");
+            $rechercheeleve = $requete->result();
+            return $rechercheeleve;
+        }
+    }
+
+    public function listeelevecursus()
+    {
+        $requete = $this->db->query("SELECT comptes.id, comptes.username, comptes.email, comptes.status, cursus.matiere, cursus.annee, cursus.frais, eleve.idEleve FROM comptes JOIN eleve ON comptes.eleve_id=eleve.idEleve JOIN cursus ON eleve.cursus_id=cursus.idCursus ");
+        $listeelevecursus = $requete->result();
+        return $listeelevecursus;
+    }
+
+    public function listeelevesanscursus()
+    {
+        $requete = $this->db->query("SELECT comptes.id, comptes.username, comptes.email, comptes.status, eleve.idEleve FROM comptes INNER JOIN eleve ON comptes.eleve_id=eleve.idEleve WHERE cursus_id IS NULL");
+        $listeelevesanscursus = $requete->result();
+        return $listeelevesanscursus;
     }
 }

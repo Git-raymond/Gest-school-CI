@@ -308,4 +308,91 @@ class Page extends CI_Controller
         $this->load->view('footer');
     }
 
+    public function cursuseleve()
+    {
+        if ($this->session->userdata('type') === 'admin') {
+
+            $this->load->model('Page_model');
+
+            $data['listeeleves'] = $this->Page_model->listeeleves();
+
+            $this->load->view('header');
+            $this->load->view('cursuseleve', $data);
+            $this->load->view('footer');
+        } else {
+            echo "Access Denied";
+        }
+    }
+
+    public function cursuseleveattribution($comptes)
+    {
+
+        if ($this->session->userdata('type') === 'admin') {
+
+            $this->load->model('Page_model');
+
+            $data['comptes'] = $this->Page_model->find_name($comptes);
+            $data['listecursus'] = $this->Page_model->listecursus();
+            
+            $ide = $this->input->post('eleve_id');
+            $cur = $this->input->post('idCursus');
+
+            $this->Page_model->attribuecursuseleve($ide, $cur);
+
+            $this->load->view('header');
+            $this->load->view('cursuseleveattribution', $data);
+            $this->load->view('footer');
+        } else {
+            echo "Access Denied";
+        }
+    }
+
+    public function rechercheeleve()
+    {
+        if ($this->session->userdata('type') === 'admin') {
+
+            $this->load->model('Page_model');
+
+            $data['rechercheeleve'] = $this->Page_model->rechercheeleve();
+
+            $this->load->view('header');
+            $this->load->view('rechercheeleve', $data);
+            $this->load->view('footer');
+        } else {
+            echo "Access Denied";
+        }
+    }
+
+    public function listeelevecursus()
+    {
+        if ($this->session->userdata('type') === 'admin') {
+
+            $this->load->model('Page_model');
+
+            $data['listeelevecursus'] = $this->Page_model->listeelevecursus();
+
+            $this->load->view('header');
+            $this->load->view('listeelevecursus', $data);
+            $this->load->view('footer');
+        } else {
+            echo "Access Denied";
+        }
+    }
+
+    public function listeelevesanscursus()
+    {
+        if ($this->session->userdata('type') === 'admin') {
+
+            $this->load->model('Page_model');
+
+            $data['listeelevesanscursus'] = $this->Page_model->listeelevesanscursus();
+
+            $this->load->view('header');
+            $this->load->view('listeelevesanscursus', $data);
+            $this->load->view('footer');
+        } else {
+            echo "Access Denied";
+        }
+    }
+
 }

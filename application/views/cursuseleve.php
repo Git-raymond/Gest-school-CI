@@ -1,57 +1,32 @@
-<?php
-include 'functions.php';
-session_start();
-?>
-<?= template_header('Choix attribution cursus élève') ?>
-
-<?php
-if (!isset($_SESSION['type'])) {
-    header('Location:register.php');
-    exit();
-}
-require_once "connexion.php";
-
-$select_stmt = $db->prepare("SELECT * FROM comptes WHERE type= 'eleve'");
-$select_stmt->execute();
-
-?>
 <div class="container">
     <h2 class="text-warning text-center mt-5 mb-3">Liste de tous les élèves</h2>
     <br>
-    <?php
-    if ($select_stmt->rowCount() > 0) {
-    ?>
-        <table class="table table-bordered table-striped table-dark table-hover bg-light">
-            <tr>
-                <td>Prénom</td>
-                <td>Email</td>
-                <td>Statut (1=actif, 0=nul)</td>
-                <td width="200px">ATTRIBUER UN CURSUS</td>
-            </tr>
-            <?php
-            while ($row = $select_stmt->fetch(PDO::FETCH_ASSOC)) {
-                echo "<form action='' method='POST'>";
-                echo "<input type='hidden' value='" . $row['id'] . "' name='userid' />";
-                echo "<tr>";
-                echo "<td>" . $row['username'] . "</td>";
-                echo "<td>" . $row['email'] . "</td>";
-                echo "<td>" . $row['status'] . "</td>";
-                echo "<td><a href='cursuseleveattribution.php?id=" . $row['id'] . "' class='d-grid gap-2 col-6 mx-auto btn btn-info'>Attribuer</a></td>";
-                echo "</tr>";
-                echo "</form>";
-            }
-            ?>
-        </table>
+
+    <table class="text-center table table-bordered table-striped table-dark table-hover bg-light">
+        <tr class="text-warning">
+            <td>Prénom</td>
+            <td>Email</td>
+            <td width="200">Statut (1=actif, 0=nul)</td>
+            <td width="200px">ATTRIBUER UN CURSUS</td>
+        </tr>
+        <tbody>
+            <?php if ($listeeleves) : ?>
+                <?php foreach ($listeeleves as $eleve) : ?>
+                    <tr>
+                        <td><?php echo $eleve->username; ?></td>
+                        <td><?php echo $eleve->email; ?></td>
+                        <td><?php echo $eleve->status; ?></td>
+                        <td><a href='<?= site_url('page/cursuseleveattribution/' . $eleve->id); ?>' class='d-grid gap-2 col-6 mx-auto btn btn-info'>Attribuer</a></td>
+                    </tr>
+                <?php endforeach; ?>
+            <?php endif; ?>
+        </tbody>
+    </table>
 </div>
 <br><br>
-<?php
-    } else {
-        echo ".<br><br><div class='text-center text-danger'><p>Aucun élève inscrit !</p></div></div>";
-    }
-?>
-<div class="text-center"> [ <a href="indexadmin.php">Retour</a> ] </div>
+
+<div class="text-center"> [ <a href="<?= site_url('page/indexadmin'); ?>">Retour</a> ] </div>
 <br><br>
 </body>
-</html>
 
-<?= template_footer() ?>
+</html>

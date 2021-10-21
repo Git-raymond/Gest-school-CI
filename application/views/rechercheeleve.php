@@ -1,17 +1,3 @@
-<?php
-include 'functions.php';
-session_start();
-?>
-<?= template_header('Recherche élève') ?>
-
-<?php
-if (!isset($_SESSION['type'])) {
-    header('Location:register.php');
-    exit();
-}
-require_once "connexion.php";
-?>
-
 <h2 class="text-center text-warning mt-5 mb-5">Recherche des élèves</h2>
 
 <!-- <div class="container"> -->
@@ -23,47 +9,30 @@ require_once "connexion.php";
 </form>
 <!-- <div> -->
 
-<?php
-
-// Récupère la recherche
-if (isset($_POST['recherche'])) {
-    $recherche = $_POST['recherche'];
-    $select_stmt = $db->prepare("SELECT username, email, status FROM comptes WHERE type='eleve' AND username LIKE '%$recherche%' OR type='eleve' AND email LIKE '%$recherche%' OR type='eleve' AND status LIKE '%$recherche%'");
-    $select_stmt->execute();
-
-    // affichage du résultat
-    echo "<div class='container bg-light'>";
-    // echo "<h2>Résultat des recherches</h2>";
-    echo "<table class='table table-bordered table-striped table-dark table-hover'>";
-    if ($select_stmt->rowCount() < 1) {
-        echo '<h3 class="text-center text-danger p-2">Pas de résultat trouvé</h3>';
-    } else {
-?>
-        <tr>
+<div class='container bg-light'>
+    <h2 class="text-success text-center">Résultat des recherches</h2>
+    <table class='table table-bordered table-striped table-dark table-hover'>
+        <!-- <h3 class="text-center text-danger p-2">Pas de résultat trouvé</h3> -->
+        <tr class="text-warning text-center">
             <td>Nom</td>
             <td>Email</td>
-            <td>Statut (1=actif, 0=nul)</td>
+            <td width="250px">Statut (1=actif, 0=nul)</td>
         </tr>
-<?php
-        while ($row = $select_stmt->fetch(PDO::FETCH_ASSOC)) {
-            echo "<form action='' method='POST'>";
-            echo "<tr>";
-            echo "<td>" . $row['username'] . "</td>";
-            echo "<td>" . $row['email'] . "</td>";
-            echo "<td>" . $row['status'] . "</td>";
-            echo "</tr>";
-            echo "</form>";
-        }
-    }
-    echo "</table>";
-    echo "</div>";
-}
-
-?>
-<div class="text-center"> [ <a href="indexadmin.php">Retour</a> ] </div>
+        <tbody class="text-center">
+            <?php if ($rechercheeleve) : ?>
+                <?php foreach ($rechercheeleve  as $eleve) : ?>
+                    <tr>
+                        <td><?php echo $eleve->username; ?></td>
+                        <td><?php echo $eleve->email; ?></td>
+                        <td><?php echo $eleve->status; ?></td>
+                    </tr>
+                <?php endforeach; ?>
+            <?php endif; ?>
+        </tbody>
+    </table>
+</div>
+<div class="text-center"> [ <a href="<?= site_url('page/indexadmin'); ?>">Retour</a> ] </div>
 <br><br>
 </body>
 
 </html>
-
-<?= template_footer() ?>
