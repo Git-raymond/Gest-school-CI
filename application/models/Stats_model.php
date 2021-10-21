@@ -32,7 +32,7 @@ class Stats_model extends CI_Model
 
     public function listeprofil()
     {
-        $requete = $this->db->query("SELECT username, email, type,  matiere, annee, frais FROM comptes JOIN eleve ON comptes.eleve_id=eleve.idEleve JOIN cursus ON eleve.cursus_id=cursus.idCursus");
+        $requete = $this->db->query("SELECT username, email, type, matiere, annee, frais FROM comptes JOIN eleve ON comptes.eleve_id=eleve.idEleve JOIN cursus ON eleve.cursus_id=cursus.idCursus");
         $profils = $requete->result();
         return $profils;
     }

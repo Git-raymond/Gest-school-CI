@@ -6,7 +6,7 @@
     <h4 class="text-center text-primary mt-5 mb-3">Liste des familles</h4>
 
     <table class="table table-bordered table-striped table-dark table-hover bg-light">
-        <tr>
+        <tr class="text-warning">
             <td>Nom</td>
             <td>Email</td>
             <td>Rôle</td>
@@ -32,7 +32,7 @@
     <h4 class="text-center text-primary mt-5 mb-3">Liste des profils de leurs enfants</h4>
 
     <table class="table table-bordered table-striped table-dark table-hover bg-light">
-        <tr>
+        <tr class="text-warning">
             <td>Nom</td>
             <td>Email</td>
             <td>Rôle</td>
@@ -63,7 +63,7 @@
     <h4 class="text-primary text-center mt-5 mb-3">Liste des enseignants par cursus</h4>
 
     <table class="table table-bordered table-striped table-dark table-hover bg-light">
-        <tr>
+        <tr class="text-warning">
             <td>Matière</td>
             <td>Année</td>
             <td>Nom</td>
