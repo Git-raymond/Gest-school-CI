@@ -2,7 +2,7 @@
     <h2 class="text-warning text-center mt-5 mb-3">Choisir l'enseignant</h2>
     <br>
 
-    <table class="table table-bordered table-striped table-dark table-hover bg-light">
+    <table class="text-center table table-bordered table-striped table-dark table-hover bg-light">
         <tr class="text-warning">
             <td>Nom</td>
             <td>Email</td>

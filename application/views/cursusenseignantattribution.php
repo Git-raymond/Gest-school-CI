@@ -6,23 +6,6 @@
 
             <div class="col-lg-12">
 
-                <?php
-                if (isset($errorMsg)) {
-                ?>
-                    <div class="text-center alert alert-danger">
-                        <strong>WRONG ! <?php echo $errorMsg; ?></strong>
-                    </div>
-                <?php
-                }
-                if (isset($updateMsg)) {
-                ?>
-                    <div class="text-center alert alert-success">
-                        <strong>UPDATE ! <?php echo $updateMsg; ?></strong>
-                    </div>
-                <?php
-                }
-                ?>
-
                 <div class="row">
                     <div class="col-md-6 col-md-offset-3 mx-auto">
                         <div class="box text-center text-primary mb-5">

@@ -1,8 +1,10 @@
+    
     <div class="container">
         <div class="row">
             <div class="jumbotron">
                 <h1 class="text-center text-warning mt-5 mb-5">Bienvenue <?php echo $this->session->userdata('username'); ?></h1>
             </div>
+
             <nav class="navbar navbar-default mt-5">
 
                 <?php if ($this->session->userdata('type') === 'admin') : ?>

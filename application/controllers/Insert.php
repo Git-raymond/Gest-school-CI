@@ -47,7 +47,7 @@ class Insert extends CI_Controller
             $this->load->model('Insert_Model');
             $this->Insert_Model->updatedetails($fname, $lname, $email, $cntno, $adrss, $usid);
         } else {
-            $this->session->set_flashdata('error', 'Something went wronng. Try again with valid details !!');
+            $this->session->set_flashdata('error', 'Something went wrong. Try again with valid details !!');
             redirect('read');
         }
     }

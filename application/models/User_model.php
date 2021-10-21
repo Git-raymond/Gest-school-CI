@@ -21,8 +21,19 @@ class User_model extends CI_Model {
         return $liste;
     }
 
-    public function add($data) {
+    public function addfamille($data) {
         $this->load->database();
+        $this->db->insert('famille', $data);
+        $last_id = $this->db->insert_id();
+        $data['famille_id'] = $last_id;
+        $this->db->insert('comptes', $data);
+    }
+
+    public function addprof($data) {
+        $this->load->database();
+        $this->db->insert('enseignant', $data);
+        $last_id = $this->db->insert_id();
+        $data['enseignant_id'] = $last_id;
         $this->db->insert('comptes', $data);
     }
 
@@ -35,7 +46,6 @@ class User_model extends CI_Model {
     public function remove($id) {
         $this->load->database();
         $this->load->helper('url');
-
         $this->db->where('id', $id);
         $this->db->delete('comptes');
     }

@@ -91,7 +91,7 @@ class Navigation extends CI_Controller
                 $this->load->model('user_model');
                 $post['password'] = md5($this->input->post('password'));
                 $post['type'] = 'famille';
-                $this->user_model->add($post);
+                $this->user_model->addfamille($post);
                 echo '<h2 class="text-center text-success mt-5">Inscription de la famille validée</h2>';
                 header('refresh:1;' . site_url("login"));
             }

@@ -6,7 +6,6 @@
                 <br>
                 <div class="margin-input">
                     <input type="hidden" class="box-input mb-3 rounded" name="type" placeholder="famille" value="famille">
-                    <!-- <input type="hidden" class="box-input mb-3 rounded" name="famille" placeholder="famille" value="famille"> -->
                 </div>
                 <div class="margin-input">
                     <input type="text" class="box-input mb-3 rounded" name="username" placeholder="Nom de famille">
@@ -17,9 +16,6 @@
                 <div class="margin-input">
                     <input type="password" class="box-input mb-3 rounded" name="password" placeholder="Mot de passe">
                 </div>
-                <!-- <div class="margin-input">
-                    <input type="submit" name="valider" value="S'inscrire" class="box-button mb-3 rounded shadow">
-                </div> -->
 
                 <!-- Button trigger modal -->
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">

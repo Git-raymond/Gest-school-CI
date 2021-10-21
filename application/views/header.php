@@ -116,7 +116,7 @@
 			Mon Compte
 		</a>
 		<ul class='dropdown-menu' aria-labelledby='dropdownMenuLink'>
-			<li><a class='dropdown-item' href='editcompte.php?id=" . $idEdit . "'>Modifier mon compte</a></li>
+			<li><a class='dropdown-item' href='" . site_url("page/editcompte/". $idEdit) . "'>Modifier mon compte</a></li>
 			<li><a class='dropdown-item' href='" . site_url("login/logout") . "'>Déconnexion</a></li>
 			</ul>
 		</div>

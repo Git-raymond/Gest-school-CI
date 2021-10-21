@@ -1,57 +1,32 @@
-<?php
-include 'functions.php';
-session_start();
-?>
-<?= template_header('Liste enseignants') ?>
 
-<?php
-if (!isset($_SESSION['type'])) {
-    header('Location:register.php');
-    exit();
-}
-require_once "connexion.php";
-
-$select_stmt = $db->prepare("SELECT * FROM comptes WHERE type= 'enseignant'");
-$select_stmt->execute();
-
-?>
 <div class="container">
     <h2 class="text-warning text-center mt-5 mb-3">Liste des enseignants</h2>
     <br>
-    <?php
-    if ($select_stmt->rowCount() > 0) {
-    ?>
-        <table class="table table-bordered table-striped table-dark table-hover bg-light">
-            <tr>
+   
+        <table class="table table-bordered table-striped table-dark table-hover bg-light text-center">
+            <tr class="text-warning" >
                 <td>Nom</td>
                 <td>Email</td>
-                <td>Statut (1=actif, 0=nul)</td>
+                <td width="300">Statut (1=actif, 0=nul)</td>
                 <td width="70px">EDIT</td>
             </tr>
-            <?php
-            while ($row = $select_stmt->fetch(PDO::FETCH_ASSOC)) {
-                echo "<form action='' method='POST'>";
-                echo "<input type='hidden' value='" . $row['id'] . "' name='userid' />";
-                echo "<tr>";
-                echo "<td>" . $row['username'] . "</td>";
-                echo "<td>" . $row['email'] . "</td>";
-                echo "<td>" . $row['status'] . "</td>";
-                echo "<td><a href='editcompte.php?id=" . $row['id'] . "' class='btn btn-info'>Edit</a></td>";
-                echo "</tr>";
-                echo "</form>";
-            }
-            ?>
+            <tbody>
+            <?php if ($listeprofs) : ?>
+                <?php foreach ($listeprofs as $prof) : ?>
+                    <tr>
+                        <td><?php echo $prof->username; ?></td>
+                        <td><?php echo $prof->email; ?></td>
+                        <td><?php echo $prof->status; ?></td>
+                        <td><a href='<?= site_url('page/editcompte/'. $prof->id);?>' class='btn btn-info'>Edit</a></td>
+                    </tr>
+                <?php endforeach; ?>
+            <?php endif; ?>
+        </tbody>
         </table>
 </div>
 <br><br>
-<?php
-    } else {
-        echo ".<br><br><div class='text-center text-danger'><p>Aucun enseignant inscrit !</p></div></div>";
-    }
-?>
-<div class="text-center"> [ <a href="indexadmin.php">Retour</a> ] </div>
+
+<div class="text-center"> [ <a href="<?= site_url('page/indexadmin'); ?>">Retour</a> ] </div>
 <br><br>
 </body>
 </html>
-
-<?= template_footer() ?>

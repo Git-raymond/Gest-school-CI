@@ -4,14 +4,14 @@
             <form class="form-signin" action="<?php echo site_url('login/auth'); ?>" method="post">
                 <h1 class="form-signin-heading text-primary text-center mt-5 mb-4">Connexion</h1>
                 <p class="text-danger pb-1"><?php echo $this->session->flashdata('msg'); ?></p>
-                <label for="email" class="sr-only">Email</label>
-                <input type="email" name="email" class="form-control mb-4" placeholder="Email" required autofocus>
-                <label for="password" class="sr-only">Password</label>
-                <input type="password" name="password" class="form-control mb-4" placeholder="Password" required>
+                <label for="email" class="text-primary">Email</label>
+                <input type="email" name="email" class="form-control mb-4" placeholder="" required autofocus>
+                <label for="password" class="text-primary">Password</label>
+                <input type="password" name="password" class="form-control mb-4" placeholder="" required>
                 <div class="checkbox">
-                    <label>
+                    <!-- <label>
                         <input type="checkbox" value="remember-me"> Remember me
-                    </label>
+                    </label> -->
                 </div class="text-center">
                 <button class="btn btn-lg btn-primary btn-block mt-4 mb-3" type="submit">Se connecter</button>
             </form>
