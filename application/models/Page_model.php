@@ -6,7 +6,6 @@ allowed');
 
 class Page_model extends CI_Model
 {
-
     public function __construct()
     {
         parent::__construct();
@@ -182,8 +181,7 @@ class Page_model extends CI_Model
 
     public function affichenotesfamille()
     {
-        $eleve_id = 87;
-        // $eleve_id = $_REQUEST['id']; 
+        $eleve_id = $this->uri->segment(3);
         $requete = $this->db->query("SELECT controle.intitule, controle.note, controle.commentaire, controle.date FROM controle WHERE controle.eleve_id=$eleve_id");
         $affichenotesfamille = $requete->result();
         return $affichenotesfamille;
@@ -214,8 +212,7 @@ class Page_model extends CI_Model
 
     public function affichenotesprof()
     {
-        $eleve_id = 87;
-        // $eleve_id = $_REQUEST['id']; 
+        $eleve_id = $this->uri->segment(3);
         $requete = $this->db->query("SELECT * FROM controle WHERE eleve_id=$eleve_id");
         $affichenotesprof = $requete->result();
         return $affichenotesprof;
