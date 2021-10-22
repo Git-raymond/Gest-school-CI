@@ -9,6 +9,13 @@ class Navigation extends CI_Controller
         $this->load->view('footer');
     }
 
+    public function comptesuspendu()
+    {
+        $this->load->view('header');
+        $this->load->view('video');
+        $this->load->view('footer');
+    }
+
     public function contact()
     {
         $this->load->view('header');
@@ -18,14 +25,10 @@ class Navigation extends CI_Controller
 
     public function indexadmin()
     {
-        // if ($this->session->connected == false) {
-        //     redirect(site_url('Navigation/login'));
-        // }
         $this->auth->authorized(
             ["admin"],
             "Navigation/login"
         );
-        // $this->output->enable_profiler(true);
         $this->load->view('header');
         $this->load->view('indexadmin');
         $this->load->view('footer');
@@ -148,11 +151,11 @@ class Navigation extends CI_Controller
     //     $this->load->view('footer');
     // }
 
-    public function deconnection()
-    {
-        $this->auth->logout(true);
-        redirect(site_url("Navigation/login"));
-    }
+    // public function deconnection()
+    // {
+    //     $this->auth->logout(true);
+    //     redirect(site_url("Navigation/login"));
+    // }
 
     public function welcome_message()
     {

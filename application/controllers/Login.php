@@ -29,6 +29,9 @@ class Login extends CI_Controller
             $famille_id = $data['famille_id'];
             $eleve_id = $data['eleve_id'];
             $enseignant_id = $data['enseignant_id'];
+            if ($status == 0) {
+                redirect(site_url('Navigation/comptesuspendu'));
+            }
             $sesdata = array(
                 'id'  => $id,
                 'username'  => $name,
@@ -40,6 +43,7 @@ class Login extends CI_Controller
                 'enseignant_id'     => $enseignant_id,
                 'logged_in' => TRUE
             );
+
             $this->session->set_userdata($sesdata);
             // access login for admin
 
@@ -52,7 +56,6 @@ class Login extends CI_Controller
             } else {
                 redirect('page/indexenseignant');
             }
-            
         } else {
             echo $this->session->set_flashdata('msg', 'Email or Password is Wrong');
             redirect('login');
