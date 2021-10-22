@@ -24,13 +24,13 @@
 </style>
 
 <body onLoad="document.fo.login.focus()">
-    <h2 class="text-center mt-5 mb-5">Bienvenue</h2>
+<h1 class="text-center text-warning mt-5 mb-5">Bienvenue <?php echo $this->session->userdata('username'); ?></h1>
     <br>
     <div class="text-center">
-        <button type="button" class="btn btn-outline-warning btn-lg btn-block"><a href="affichenotes.php">Afficher mes notes</a></button>
+        <button type="button" class="btn btn-outline-warning btn-lg btn-block"><a href="<?= site_url('page/affichenotes/'); ?>">Afficher mes notes</a></button>
     </div>
     <br><br><br>
-    <div class="text-center"> [ <a href="<?= site_url('navigation/deconnection/'); ?>">Se déconnecter</a> ] </div>
+    <div class="text-center"> [ <a href="<?= site_url('login/logout//'); ?>">Se déconnecter</a> ] </div>
     <br><br><br><br><br><br>
 </body>
 

@@ -27,7 +27,7 @@
 </div>
 <br><br>
 
-<div class="text-center"> [ <a href="indexadmin.php">Retour</a> ] </div>
+<div class="text-center"> [ <a href="<?= site_url('page/indexadmin'); ?>">Retour</a> ] </div>
 <br><br>
 </body>
 

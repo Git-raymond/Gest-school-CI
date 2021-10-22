@@ -116,7 +116,7 @@ class Page_model extends CI_Model
 
             $this->db->where('idEleve', $ide)
                 ->update('eleve', $data);
-        
+
             echo '<h1 class="text-center text-success">Le cursus a bien été attribué</h1>';
         }
     }
@@ -145,5 +145,115 @@ class Page_model extends CI_Model
         $requete = $this->db->query("SELECT comptes.id, comptes.username, comptes.email, comptes.status, eleve.idEleve FROM comptes INNER JOIN eleve ON comptes.eleve_id=eleve.idEleve WHERE cursus_id IS NULL");
         $listeelevesanscursus = $requete->result();
         return $listeelevesanscursus;
+    }
+
+    public function rechercheelevefamille()
+    {
+        $famille_id = ($this->session->userdata('famille_id'));
+
+        if ($this->input->post('recherche')) {
+
+            $recherche = $this->input->post('recherche');
+
+            $requete = $this->db->query("SELECT comptes.username, comptes.email, comptes.status FROM comptes WHERE type='eleve' AND famille_id=$famille_id AND comptes.username LIKE '%$recherche%' OR type='eleve' AND famille_id=$famille_id AND comptes.email LIKE '%$recherche%' OR type='eleve' AND famille_id=$famille_id AND status LIKE '%$recherche%'");
+            $rechercheelevefamille = $requete->result();
+            return $rechercheelevefamille;
+        }
+    }
+
+    public function listeeleveattentefamille()
+    {
+        $famille_id = ($this->session->userdata('famille_id'));
+
+        $requete = $this->db->query("SELECT * FROM comptes INNER JOIN eleve ON comptes.eleve_id=eleve.idEleve WHERE cursus_id IS NULL AND eleve.famille_id=$famille_id");
+        $listeeleveattentefamille = $requete->result();
+        return $listeeleveattentefamille;
+    }
+
+    public function listeelevefamille()
+    {
+
+        $famille_id = ($this->session->userdata('famille_id'));
+
+        $requete = $this->db->query("SELECT * FROM comptes JOIN eleve ON comptes.eleve_id=eleve.idEleve JOIN cursus ON eleve.cursus_id=cursus.idCursus WHERE eleve.famille_id=$famille_id");
+        $listeelevefamille = $requete->result();
+        return $listeelevefamille;
+    }
+
+    public function affichenotesfamille()
+    {
+        $eleve_id = 87;
+        // $eleve_id = $_REQUEST['id']; 
+        $requete = $this->db->query("SELECT controle.intitule, controle.note, controle.commentaire, controle.date FROM controle WHERE controle.eleve_id=$eleve_id");
+        $affichenotesfamille = $requete->result();
+        return $affichenotesfamille;
+    }
+
+    public function rechercheelevecursusprof()
+    {
+        $enseignant_id = ($this->session->userdata('enseignant_id'));
+
+        if ($this->input->post('recherche')) {
+
+            $recherche = $this->input->post('recherche');
+
+            $requete = $this->db->query("SELECT comptes.username, comptes.email, comptes.status FROM comptes JOIN eleve ON comptes.eleve_id=eleve.idEleve JOIN cursus ON eleve.cursus_id=cursus.idCursus WHERE cursus.enseignant_id=$enseignant_id AND comptes.username LIKE '%$recherche%' OR cursus.enseignant_id=$enseignant_id AND comptes.email LIKE '%$recherche%' OR cursus.enseignant_id=$enseignant_id AND status LIKE '%$recherche%'");
+            $rechercheelevecursusprof = $requete->result();
+            return $rechercheelevecursusprof;
+        }
+    }
+
+    public function listeelevecursusprof()
+    {
+        $enseignant_id = ($this->session->userdata('enseignant_id'));
+
+        $requete = $this->db->query("SELECT comptes.username, comptes.email, comptes.status, comptes.eleve_id, cursus.matiere, cursus.annee FROM comptes JOIN eleve ON comptes.eleve_id=eleve.idEleve JOIN cursus ON eleve.cursus_id=cursus.idCursus WHERE cursus.enseignant_id=$enseignant_id");
+        $listeelevecursusprof = $requete->result();
+        return $listeelevecursusprof;
+    }
+
+    public function affichenotesprof()
+    {
+        $eleve_id = 87;
+        // $eleve_id = $_REQUEST['id']; 
+        $requete = $this->db->query("SELECT * FROM controle WHERE eleve_id=$eleve_id");
+        $affichenotesprof = $requete->result();
+        return $affichenotesprof;
+    }
+
+    public function listecursusprof()
+    {
+        $enseignant_id = ($this->session->userdata('enseignant_id'));
+
+        $requete = $this->db->query("SELECT * FROM cursus WHERE cursus.enseignant_id=$enseignant_id");
+        $listecursusprof = $requete->result();
+        return $listecursusprof;
+    }
+
+    public function affichenotes()
+    {
+        $eleve_id = ($this->session->userdata('eleve_id'));
+
+        $requete = $this->db->query("SELECT * FROM controle WHERE eleve_id=$eleve_id");
+        $affichenotes = $requete->result();
+        return $affichenotes;
+    }
+
+    public function ajoutcontrole($idControle, $eleve_id)
+    {
+        $enseignant_id = ($this->session->userdata('enseignant_id'));
+        if ($this->input->post('valider')) {
+            $data = array(
+                'intitule' => ($this->input->post('intitule')),
+                'note' => ($this->input->post('note')),
+                'commentaire' => ($this->input->post('commentaire')),
+                'date' => ($this->input->post('date')),
+                'enseignant_id' => $enseignant_id,
+                'eleve_id' => $eleve_id
+            );
+            $this->db->where('idControle', $idControle)
+                ->insert('controle', $data);
+            // echo '<h1 class="text-center text-success">Le contrôle a bien été attribué</h1>';
+        }
     }
 }

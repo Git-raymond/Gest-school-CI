@@ -25,15 +25,24 @@ class Login extends CI_Controller
             $name  = $data['username'];
             $email = $data['email'];
             $level = $data['type'];
+            $status = $data['status'];
+            $famille_id = $data['famille_id'];
+            $eleve_id = $data['eleve_id'];
+            $enseignant_id = $data['enseignant_id'];
             $sesdata = array(
                 'id'  => $id,
                 'username'  => $name,
                 'email'     => $email,
                 'type'     => $level,
+                'status'     => $status,
+                'famille_id'     => $famille_id,
+                'eleve_id'     => $eleve_id,
+                'enseignant_id'     => $enseignant_id,
                 'logged_in' => TRUE
             );
             $this->session->set_userdata($sesdata);
             // access login for admin
+
             if ($level === 'admin') {
                 redirect('page/indexadmin');
             } elseif ($level === 'famille') {
@@ -43,6 +52,7 @@ class Login extends CI_Controller
             } else {
                 redirect('page/indexenseignant');
             }
+            
         } else {
             echo $this->session->set_flashdata('msg', 'Email or Password is Wrong');
             redirect('login');

@@ -94,6 +94,8 @@ class Navigation extends CI_Controller
                 $this->user_model->addfamille($post);
                 echo '<h2 class="text-center text-success mt-5">Inscription de la famille validée</h2>';
                 header('refresh:1;' . site_url("login"));
+            } else {
+                echo '<h2 class="text-center text-danger mt-5">N\'entrez pas d\'espace/ Saisir une adresse Email valide</h2>';
             }
         }
 

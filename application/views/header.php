@@ -84,7 +84,7 @@
         }
 
         if($this->session->userdata('type')==='enseignant') {
-          echo "<a href='indexenseignant.php'><i class='fas fa-chalkboard-teacher'></i>Espace Enseignant</a>";
+          echo "<a href='" . site_url('page/indexenseignant/') . "'><i class='fas fa-chalkboard-teacher'></i>Espace Enseignant</a>";
 
           echo "<nav id='navbar' class='navbar'></i><div class='dropdown'>
 			<a class='btn text-primary dropdown-toggle' href='#' role='button' id='dropdownMenuLink1' data-bs-toggle='dropdown' aria-expanded='false'><i class='fas fa-chalkboard'></i>

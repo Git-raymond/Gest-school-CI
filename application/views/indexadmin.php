@@ -26,9 +26,9 @@
 
 <body onLoad="document.fo.login.focus()">
     <br><br><br>
-    <h2 class="text-center mt-5 mb-5">Bienvenue Admin</h2>
+    <h1 class="text-center text-warning mt-5 mb-5">Bienvenue <?php echo $this->session->userdata('username'); ?></h1>
    
-    <div class="text-center"> [ <a href="<?= site_url('navigation/deconnection/'); ?>">Se déconnecter</a> ] </div>
+    <div class="text-center"> [ <a href="<?= site_url('login/logout/'); ?>">Se déconnecter</a> ] </div>
     <br><br><br><br><br>
 </body>
 
