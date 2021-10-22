@@ -49,11 +49,10 @@ class Login extends CI_Controller
                 redirect('page/indexfamille');
             } elseif ($level === 'eleve') {
                 redirect('page/indexeleve');
-            } elseif ($level === 'enseignant') {
+            } else {
                 redirect('page/indexenseignant');
-            } elseif ($status === 0) {
-                redirect('login');
             }
+            
         } else {
             echo $this->session->set_flashdata('msg', 'Email or Password is Wrong');
             redirect('login');
