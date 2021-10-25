@@ -45,7 +45,6 @@ class Login extends CI_Controller
             );
 
             $this->session->set_userdata($sesdata);
-            // access login for admin
 
             if ($level === 'admin') {
                 redirect('page/indexadmin');

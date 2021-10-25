@@ -158,6 +158,7 @@
 		<nav id="navbar" class="navbar">
         <ul>
           <li><a href="' . base_url('index.php') . '"><i class="fas fa-home"></i>Accueil</a></li>
+          <li><a href="' . site_url('navigation/news/') . '"><i class="fas fa-newspaper"></i>News</a></li>
           <li><a href="' . site_url('navigation/register/') . '"><i class="fas fa-address-book"></i>Inscription</a></li>'
       ?>
 

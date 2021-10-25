@@ -17,19 +17,19 @@ class Page_model extends CI_Model
 
     public function listeprofs()
     {
-        $requete = $this->db->query("SELECT * FROM comptes WHERE type='enseignant'");
+        $requete = $this->db->query("SELECT * FROM p3_g3_comptes WHERE type='enseignant'");
         $listeprofs = $requete->result();
         return $listeprofs;
     }
 
     public function find_name($comptes)
     {
-        return $this->db->get_where('comptes', array('id' => $comptes))->row();
+        return $this->db->get_where('p3_g3_comptes', array('id' => $comptes))->row();
     }
 
     public function listecursus()
     {
-        $requete = $this->db->query("SELECT * FROM cursus");
+        $requete = $this->db->query("SELECT * FROM p3_g3_cursus");
         $listecursus = $requete->result();
         return $listecursus;
     }
@@ -43,7 +43,7 @@ class Page_model extends CI_Model
             );
 
             $this->db->where('idCursus', $idc)
-                ->update('cursus', $data);
+                ->update('p3_g3_cursus', $data);
             echo '<h1 class="text-center text-success">Le cursus a bien été attribué</h1>';
         }
     }
@@ -54,7 +54,7 @@ class Page_model extends CI_Model
 
             $recherche = $this->input->post('recherche');
 
-            $requete = $this->db->query("SELECT username, email, status FROM comptes WHERE type='enseignant' AND username LIKE '%$recherche%' OR type='enseignant' AND email LIKE '%$recherche%' OR type='enseignant' AND status LIKE '%$recherche%'");
+            $requete = $this->db->query("SELECT username, email, status FROM p3_g3_comptes WHERE type='enseignant' AND username LIKE '%$recherche%' OR type='enseignant' AND email LIKE '%$recherche%' OR type='enseignant' AND status LIKE '%$recherche%'");
             $rechercheprofs = $requete->result();
             return $rechercheprofs;
         }
@@ -66,7 +66,7 @@ class Page_model extends CI_Model
 
             $recherche = $this->input->post('recherche');
 
-            $requete = $this->db->query("SELECT matiere, annee, frais FROM cursus WHERE matiere LIKE '%$recherche%' OR annee LIKE '%$recherche%'");
+            $requete = $this->db->query("SELECT matiere, annee, frais FROM p3_g3_cursus WHERE matiere LIKE '%$recherche%' OR annee LIKE '%$recherche%'");
             $recherchecursus = $requete->result();
             return $recherchecursus;
         }
@@ -75,19 +75,19 @@ class Page_model extends CI_Model
     public function addcursus($data)
     {
         $this->load->database();
-        $this->db->insert('cursus', $data);
+        $this->db->insert('p3_g3_cursus', $data);
     }
 
     public function find_cursus($cursus)
     {
-        return $this->db->get_where('cursus', array('idCursus' => $cursus))->row();
+        return $this->db->get_where('p3_g3_cursus', array('idCursus' => $cursus))->row();
     }
 
     public function updatecursus($id, $data)
     {
         $this->load->database();
         $this->db->where('idCursus', $id);
-        $this->db->update('cursus', $data);
+        $this->db->update('p3_g3_cursus', $data);
     }
 
     public function removecursus($id)
@@ -95,12 +95,12 @@ class Page_model extends CI_Model
         $this->load->database();
         $this->load->helper('url');
         $this->db->where('idCursus', $id);
-        $this->db->delete('cursus');
+        $this->db->delete('p3_g3_cursus');
     }
 
     public function listeeleves()
     {
-        $requete = $this->db->query("SELECT * FROM comptes WHERE type='eleve'");
+        $requete = $this->db->query("SELECT * FROM p3_g3_comptes WHERE type='eleve'");
         $listeeleves = $requete->result();
         return $listeeleves;
     }
@@ -114,7 +114,7 @@ class Page_model extends CI_Model
             );
 
             $this->db->where('idEleve', $ide)
-                ->update('eleve', $data);
+                ->update('p3_g3_eleve', $data);
 
             echo '<h1 class="text-center text-success">Le cursus a bien été attribué</h1>';
         }
@@ -126,7 +126,7 @@ class Page_model extends CI_Model
 
             $recherche = $this->input->post('recherche');
 
-            $requete = $this->db->query("SELECT username, email, status FROM comptes WHERE type='eleve' AND username LIKE '%$recherche%' OR type='eleve' AND email LIKE '%$recherche%' OR type='eleve' AND status LIKE '%$recherche%'");
+            $requete = $this->db->query("SELECT username, email, status FROM p3_g3_comptes WHERE type='eleve' AND username LIKE '%$recherche%' OR type='eleve' AND email LIKE '%$recherche%' OR type='eleve' AND status LIKE '%$recherche%'");
             $rechercheeleve = $requete->result();
             return $rechercheeleve;
         }
@@ -134,14 +134,14 @@ class Page_model extends CI_Model
 
     public function listeelevecursus()
     {
-        $requete = $this->db->query("SELECT comptes.id, comptes.username, comptes.email, comptes.status, cursus.matiere, cursus.annee, cursus.frais, eleve.idEleve FROM comptes JOIN eleve ON comptes.eleve_id=eleve.idEleve JOIN cursus ON eleve.cursus_id=cursus.idCursus ");
+        $requete = $this->db->query("SELECT p3_g3_comptes.id, p3_g3_comptes.username, p3_g3_comptes.email, p3_g3_comptes.status, p3_g3_cursus.matiere, p3_g3_cursus.annee, p3_g3_cursus.frais, p3_g3_eleve.idEleve FROM p3_g3_comptes JOIN p3_g3_eleve ON p3_g3_comptes.eleve_id=p3_g3_eleve.idEleve JOIN p3_g3_cursus ON p3_g3_eleve.cursus_id=p3_g3_cursus.idCursus ");
         $listeelevecursus = $requete->result();
         return $listeelevecursus;
     }
 
     public function listeelevesanscursus()
     {
-        $requete = $this->db->query("SELECT comptes.id, comptes.username, comptes.email, comptes.status, eleve.idEleve FROM comptes INNER JOIN eleve ON comptes.eleve_id=eleve.idEleve WHERE cursus_id IS NULL");
+        $requete = $this->db->query("SELECT p3_g3_comptes.id, p3_g3_comptes.username, p3_g3_comptes.email, p3_g3_comptes.status, p3_g3_eleve.idEleve FROM p3_g3_comptes INNER JOIN p3_g3_eleve ON p3_g3_comptes.eleve_id=p3_g3_eleve.idEleve WHERE cursus_id IS NULL");
         $listeelevesanscursus = $requete->result();
         return $listeelevesanscursus;
     }
@@ -154,7 +154,7 @@ class Page_model extends CI_Model
 
             $recherche = $this->input->post('recherche');
 
-            $requete = $this->db->query("SELECT comptes.username, comptes.email, comptes.status FROM comptes WHERE type='eleve' AND famille_id=$famille_id AND comptes.username LIKE '%$recherche%' OR type='eleve' AND famille_id=$famille_id AND comptes.email LIKE '%$recherche%' OR type='eleve' AND famille_id=$famille_id AND status LIKE '%$recherche%'");
+            $requete = $this->db->query("SELECT p3_g3_comptes.username, p3_g3_comptes.email, p3_g3_comptes.status FROM p3_g3_comptes WHERE type='eleve' AND famille_id=$famille_id AND p3_g3_comptes.username LIKE '%$recherche%' OR type='eleve' AND famille_id=$famille_id AND p3_g3_comptes.email LIKE '%$recherche%' OR type='eleve' AND famille_id=$famille_id AND status LIKE '%$recherche%'");
             $rechercheelevefamille = $requete->result();
             return $rechercheelevefamille;
         }
@@ -164,7 +164,7 @@ class Page_model extends CI_Model
     {
         $famille_id = ($this->session->userdata('famille_id'));
 
-        $requete = $this->db->query("SELECT * FROM comptes INNER JOIN eleve ON comptes.eleve_id=eleve.idEleve WHERE cursus_id IS NULL AND eleve.famille_id=$famille_id");
+        $requete = $this->db->query("SELECT * FROM p3_g3_comptes INNER JOIN p3_g3_eleve ON p3_g3_comptes.eleve_id=p3_g3_eleve.idEleve WHERE cursus_id IS NULL AND p3_g3_eleve.famille_id=$famille_id");
         $listeeleveattentefamille = $requete->result();
         return $listeeleveattentefamille;
     }
@@ -174,7 +174,7 @@ class Page_model extends CI_Model
 
         $famille_id = ($this->session->userdata('famille_id'));
 
-        $requete = $this->db->query("SELECT * FROM comptes JOIN eleve ON comptes.eleve_id=eleve.idEleve JOIN cursus ON eleve.cursus_id=cursus.idCursus WHERE eleve.famille_id=$famille_id");
+        $requete = $this->db->query("SELECT * FROM p3_g3_comptes JOIN p3_g3_eleve ON p3_g3_comptes.eleve_id=p3_g3_eleve.idEleve JOIN p3_g3_cursus ON p3_g3_eleve.cursus_id=p3_g3_cursus.idCursus WHERE p3_g3_eleve.famille_id=$famille_id");
         $listeelevefamille = $requete->result();
         return $listeelevefamille;
     }
@@ -182,7 +182,7 @@ class Page_model extends CI_Model
     public function affichenotesfamille()
     {
         $eleve_id = $this->uri->segment(3);
-        $requete = $this->db->query("SELECT controle.intitule, controle.note, controle.commentaire, controle.date FROM controle WHERE controle.eleve_id=$eleve_id");
+        $requete = $this->db->query("SELECT p3_g3_controle.intitule, p3_g3_controle.note, p3_g3_controle.commentaire, p3_g3_controle.date FROM p3_g3_controle WHERE p3_g3_controle.eleve_id=$eleve_id");
         $affichenotesfamille = $requete->result();
         return $affichenotesfamille;
     }
@@ -195,7 +195,7 @@ class Page_model extends CI_Model
 
             $recherche = $this->input->post('recherche');
 
-            $requete = $this->db->query("SELECT comptes.username, comptes.email, comptes.status FROM comptes JOIN eleve ON comptes.eleve_id=eleve.idEleve JOIN cursus ON eleve.cursus_id=cursus.idCursus WHERE cursus.enseignant_id=$enseignant_id AND comptes.username LIKE '%$recherche%' OR cursus.enseignant_id=$enseignant_id AND comptes.email LIKE '%$recherche%' OR cursus.enseignant_id=$enseignant_id AND status LIKE '%$recherche%'");
+            $requete = $this->db->query("SELECT p3_g3_comptes.username, p3_g3_comptes.email, p3_g3_comptes.status FROM p3_g3_comptes JOIN p3_g3_eleve ON p3_g3_comptes.eleve_id=p3_g3_eleve.idEleve JOIN p3_g3_cursus ON p3_g3_eleve.cursus_id=p3_g3_cursus.idCursus WHERE p3_g3_cursus.enseignant_id=$enseignant_id AND p3_g3_comptes.username LIKE '%$recherche%' OR p3_g3_cursus.enseignant_id=$enseignant_id AND p3_g3_comptes.email LIKE '%$recherche%' OR p3_g3_cursus.enseignant_id=$enseignant_id AND status LIKE '%$recherche%'");
             $rechercheelevecursusprof = $requete->result();
             return $rechercheelevecursusprof;
         }
@@ -205,7 +205,7 @@ class Page_model extends CI_Model
     {
         $enseignant_id = ($this->session->userdata('enseignant_id'));
 
-        $requete = $this->db->query("SELECT comptes.username, comptes.email, comptes.status, comptes.eleve_id, cursus.matiere, cursus.annee FROM comptes JOIN eleve ON comptes.eleve_id=eleve.idEleve JOIN cursus ON eleve.cursus_id=cursus.idCursus WHERE cursus.enseignant_id=$enseignant_id");
+        $requete = $this->db->query("SELECT p3_g3_comptes.username, p3_g3_comptes.email, p3_g3_comptes.status, p3_g3_comptes.eleve_id, p3_g3_cursus.matiere, p3_g3_cursus.annee FROM p3_g3_comptes JOIN p3_g3_eleve ON p3_g3_comptes.eleve_id=p3_g3_eleve.idEleve JOIN p3_g3_cursus ON p3_g3_eleve.cursus_id=p3_g3_cursus.idCursus WHERE p3_g3_cursus.enseignant_id=$enseignant_id");
         $listeelevecursusprof = $requete->result();
         return $listeelevecursusprof;
     }
@@ -213,7 +213,7 @@ class Page_model extends CI_Model
     public function affichenotesprof()
     {
         $eleve_id = $this->uri->segment(3);
-        $requete = $this->db->query("SELECT * FROM controle WHERE eleve_id=$eleve_id");
+        $requete = $this->db->query("SELECT * FROM p3_g3_controle WHERE eleve_id=$eleve_id");
         $affichenotesprof = $requete->result();
         return $affichenotesprof;
     }
@@ -222,7 +222,7 @@ class Page_model extends CI_Model
     {
         $enseignant_id = ($this->session->userdata('enseignant_id'));
 
-        $requete = $this->db->query("SELECT * FROM cursus WHERE cursus.enseignant_id=$enseignant_id");
+        $requete = $this->db->query("SELECT * FROM p3_g3_cursus WHERE p3_g3_cursus.enseignant_id=$enseignant_id");
         $listecursusprof = $requete->result();
         return $listecursusprof;
     }
@@ -231,7 +231,7 @@ class Page_model extends CI_Model
     {
         $eleve_id = ($this->session->userdata('eleve_id'));
 
-        $requete = $this->db->query("SELECT * FROM controle WHERE eleve_id=$eleve_id");
+        $requete = $this->db->query("SELECT * FROM p3_g3_controle WHERE eleve_id=$eleve_id");
         $affichenotes = $requete->result();
         return $affichenotes;
     }
@@ -249,7 +249,7 @@ class Page_model extends CI_Model
                 'eleve_id' => $eleve_id
             );
             $this->db->where('idControle', $idControle)
-                ->insert('controle', $data);
+                ->insert('p3_g3_controle', $data);
             // echo '<h1 class="text-center text-success">Le contrôle a bien été attribué</h1>';
         }
     }
