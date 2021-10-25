@@ -86,19 +86,22 @@ class Navigation extends CI_Controller
             $post = $this->input->post();
             unset($post['valider']);
 
-            $this->form_validation->set_rules('username', 'username', 'required|alpha_numeric');
-            $this->form_validation->set_rules('email', 'email', 'required|valid_email');
-            $this->form_validation->set_rules('password', 'password', 'required|alpha_numeric');
+            $this->form_validation->set_rules('username', 'username', 'required');
+            $this->form_validation->set_rules('email', 'email', 'required|valid_email|is_unique[comptes.email]');
+            $this->form_validation->set_rules('password', 'password', 'required');
 
             if ($this->form_validation->run()) {
                 $this->load->model('user_model');
+              
                 $post['password'] = md5($this->input->post('password'));
                 $post['type'] = 'famille';
                 $this->user_model->addfamille($post);
                 echo '<h2 class="text-center text-success mt-5">Inscription de la famille validée</h2>';
-                header('refresh:1;' . site_url("login"));
+                header('refresh:2;' . site_url("login"));
             } else {
-                echo '<h2 class="text-center text-danger mt-5">N\'entrez pas d\'espace/ Saisir une adresse Email valide</h2>';
+               
+                echo '<h2 class="text-center text-danger mt-5">Saisir une adresse Email valide/L\'adresse existe déjà</h2>';
+                
             }
         }
 

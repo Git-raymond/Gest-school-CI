@@ -140,9 +140,9 @@ class Page extends CI_Controller
                 $post = $this->input->post();
                 unset($post['ajouter']);
 
-                $this->form_validation->set_rules('username', 'username', 'required|alpha_numeric');
+                $this->form_validation->set_rules('username', 'username', 'required');
                 $this->form_validation->set_rules('email', 'email', 'required|valid_email');
-                $this->form_validation->set_rules('password', 'password', 'required|alpha_numeric');
+                $this->form_validation->set_rules('password', 'password', 'required');
 
                 if ($this->form_validation->run()) {
                     $this->load->model('user_model');
@@ -190,9 +190,9 @@ class Page extends CI_Controller
             unset($post['btn_update']);
 
             $this->form_validation->set_rules('status', 'status', 'required');
-            $this->form_validation->set_rules('username', 'username', 'required|alpha_numeric');
+            $this->form_validation->set_rules('username', 'username', 'required');
             $this->form_validation->set_rules('email', 'email', 'required|valid_email');
-            $this->form_validation->set_rules('password', 'password', 'required|alpha_numeric');
+            $this->form_validation->set_rules('password', 'password', 'required');
 
             if ($this->form_validation->run()) {
                 $this->load->model('user_model');
@@ -201,7 +201,7 @@ class Page extends CI_Controller
                 $this->user_model->update($id, $post);
                 echo '<h2 class="text-center text-success mt-5">Modification du compte validée</h2>';
             } else {
-                echo '<h2 class="text-center text-danger mt-5">Saisir les informations sans espace</h2>';
+                echo '<h2 class="text-center text-danger mt-5">Saisir une adresse email valide</h2>';
             }
         }
 
@@ -433,9 +433,9 @@ class Page extends CI_Controller
                 $post = $this->input->post();
                 unset($post['ajouter']);
 
-                $this->form_validation->set_rules('username', 'username', 'required|alpha_numeric');
+                $this->form_validation->set_rules('username', 'username', 'required');
                 $this->form_validation->set_rules('email', 'email', 'required|valid_email');
-                $this->form_validation->set_rules('password', 'password', 'required|alpha_numeric');
+                $this->form_validation->set_rules('password', 'password', 'required');
 
                 if ($this->form_validation->run()) {
                     $this->load->model('user_model');
@@ -446,7 +446,7 @@ class Page extends CI_Controller
                     echo '<h2 class="text-center text-success mt-5">Inscription de l\'élève validée</h2>';
                     // header('refresh:1;' . site_url(""));
                 } else {
-                    echo '<h2 class="text-center text-danger mt-5">N\'entrez pas d\'espace/ Saisir une adresse Email valide</h2>';
+                    echo '<h2 class="text-center text-danger mt-5">Saisir une adresse Email valide</h2>';
                 }
             }
 

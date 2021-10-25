@@ -1,7 +1,7 @@
 
 <body>
     <br>
-    <h2 class="text-center text-danger">Votre compte a été suspendu</h2>
+    <h2 class="text-center text-danger">Votre compte a été désactivé !</h2>
     <br>
     <div class="container d-flex justify-content-center">
         <div class="row">

@@ -16,9 +16,14 @@
                             </div>
                         </div>
 
-                        <label class="col-sm-3 control-label">Statut: 1=actif, 0=nul</label>
+                        <!-- <label class="col-sm-3 control-label">Statut du compte</label> -->
                         <div class="col-sm-12">
-                            <input required type="text" name="status" class="form-control" value="<?php echo $comptes->status; ?>">
+                            <!-- <input required type="text" name="status" class="form-control" value=""> -->
+                            <select class="mt-3 mb-3 text-center" name="status">
+                                <option selected="selected">- Choisir statut du compte -</option>
+                                <option value=1>Activé</option>
+                                <option value=0>Désactivé</option>
+                            </select>
                         </div>
 
                         <div class="form-group mt-3">
