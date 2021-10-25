@@ -50,7 +50,7 @@ class Navigation extends CI_Controller
             unset($post['valider']);
 
             $this->form_validation->set_rules('username', 'username', 'required');
-            $this->form_validation->set_rules('email', 'email', 'required|valid_email|is_unique[comptes.email]');
+            $this->form_validation->set_rules('email', 'email', 'required|valid_email|is_unique[p3_g3_comptes.email]');
             $this->form_validation->set_rules('password', 'password', 'required');
 
             if ($this->form_validation->run()) {
