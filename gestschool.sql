@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:8889
--- Généré le : ven. 22 oct. 2021 à 08:14
+-- Généré le : lun. 25 oct. 2021 à 06:44
 -- Version du serveur :  5.7.34
 -- Version de PHP : 8.0.8
 
@@ -46,13 +46,14 @@ CREATE TABLE `comptes` (
 INSERT INTO `comptes` (`id`, `username`, `email`, `password`, `type`, `status`, `famille_id`, `eleve_id`, `enseignant_id`) VALUES
 (1, 'admin', 'admin@mail.com', '21232f297a57a5a743894a0e4a801fc3', 'admin', 1, NULL, NULL, NULL),
 (105, 'profdemaths', '0@mail.com', '202cb962ac59075b964b07152d234b70', 'enseignant', 0, NULL, NULL, 3),
-(106, 'prof d\'hist-geo', '1@mail.com', '202cb962ac59075b964b07152d234b70', 'enseignant', 1, NULL, NULL, 4),
+(106, 'profdhistgeo', '1@mail.com', '202cb962ac59075b964b07152d234b70', 'enseignant', 1, NULL, NULL, 4),
 (107, 'prof de philo', '2@mail.com', '202cb962ac59075b964b07152d234b70', 'enseignant', 1, NULL, NULL, 5),
 (114, 'proffrancais', '9@mail.com', '202cb962ac59075b964b07152d234b70', 'enseignant', 1, NULL, NULL, 6),
 (168, 'familleDupont', 'f1@mail.com', '202cb962ac59075b964b07152d234b70', 'famille', 1, 15, NULL, NULL),
 (169, 'Fdf', 'dd@dfg.gt', '0c1b3cd3c593655ff1fab8837a79d235', 'eleve', 1, 15, 84, NULL),
 (172, 'elevetest', 'elevetest@mail.com', '202cb962ac59075b964b07152d234b70', 'eleve', 1, 15, 87, NULL),
-(173, 'eleve2test', 'eleve2test@mail.com', '202cb962ac59075b964b07152d234b70', 'eleve', 1, 15, 88, NULL);
+(173, 'eleve2test', 'eleve2test@mail.com', '202cb962ac59075b964b07152d234b70', 'eleve', 1, 15, 88, NULL),
+(177, 'new', 'new@mail.com', '202cb962ac59075b964b07152d234b70', 'famille', 1, 19, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -171,7 +172,8 @@ CREATE TABLE `famille` (
 --
 
 INSERT INTO `famille` (`idFamille`, `username`, `email`, `password`, `type`) VALUES
-(15, 'familleDupont', 'f1@mail.com', '202cb962ac59075b964b07152d234b70', 'famille');
+(15, 'familleDupont', 'f1@mail.com', '202cb962ac59075b964b07152d234b70', 'famille'),
+(19, 'new', 'new@mail.com', '202cb962ac59075b964b07152d234b70', 'famille');
 
 --
 -- Index pour les tables déchargées
@@ -229,7 +231,7 @@ ALTER TABLE `famille`
 -- AUTO_INCREMENT pour la table `comptes`
 --
 ALTER TABLE `comptes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=174;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=180;
 
 --
 -- AUTO_INCREMENT pour la table `controle`
@@ -241,7 +243,7 @@ ALTER TABLE `controle`
 -- AUTO_INCREMENT pour la table `cursus`
 --
 ALTER TABLE `cursus`
-  MODIFY `idCursus` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `idCursus` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT pour la table `eleve`
@@ -253,13 +255,13 @@ ALTER TABLE `eleve`
 -- AUTO_INCREMENT pour la table `enseignant`
 --
 ALTER TABLE `enseignant`
-  MODIFY `idEnseignant` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `idEnseignant` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT pour la table `famille`
 --
 ALTER TABLE `famille`
-  MODIFY `idFamille` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `idFamille` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- Contraintes pour les tables déchargées
