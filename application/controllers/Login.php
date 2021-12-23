@@ -9,7 +9,8 @@ class Login extends CI_Controller
 
     function index()
     {
-        $this->load->view('header');
+        $title['title'] = ucfirst('connexion');
+        $this->load->view('header', $title);
         $this->load->view('login');
         $this->load->view('footer');
     }

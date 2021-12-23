@@ -13,9 +13,9 @@ class Page extends CI_Controller
 
     function indexadmin()
     {
-
+        $title['title'] = ucfirst('espace admin');
         if ($this->session->userdata('type') === 'admin') {
-            $this->load->view('header');
+            $this->load->view('header', $title);
             $this->load->view('indexadmin');
             $this->load->view('footer');
         } else {
@@ -25,8 +25,9 @@ class Page extends CI_Controller
 
     function indexfamille()
     {
+        $title['title'] = ucfirst('espace famille');
         if ($this->session->userdata('type') === 'famille') {
-            $this->load->view('header');
+            $this->load->view('header', $title);
             $this->load->view('indexfamille');
             $this->load->view('footer');
         } else {
@@ -36,8 +37,9 @@ class Page extends CI_Controller
 
     function indexeleve()
     {
+        $title['title'] = ucfirst('espace élève');
         if ($this->session->userdata('type') === 'eleve') {
-            $this->load->view('header');
+            $this->load->view('header', $title);
             $this->load->view('indexeleve');
             $this->load->view('footer');
         } else {
@@ -47,8 +49,9 @@ class Page extends CI_Controller
 
     function indexenseignant()
     {
+        $title['title'] = ucfirst('espace enseignant');
         if ($this->session->userdata('type') === 'enseignant') {
-            $this->load->view('header');
+            $this->load->view('header', $title);
             $this->load->view('indexenseignant');
             $this->load->view('footer');
         } else {
@@ -59,6 +62,7 @@ class Page extends CI_Controller
 
     public function stats()
     {
+        $title['title'] = ucfirst('statistiques');
         if ($this->session->userdata('type') === 'admin') {
 
             $this->load->model('Stats_model');
@@ -68,7 +72,7 @@ class Page extends CI_Controller
             $data['profils'] = $this->Stats_model->listeprofil();
             $data['profs'] = $this->Stats_model->listeenseignantcursus();
 
-            $this->load->view('header');
+            $this->load->view('header', $title);
             $this->load->view('stats', $data);
             $this->load->view('footer');
         } else {
@@ -78,13 +82,14 @@ class Page extends CI_Controller
 
     public function cursusenseignant()
     {
+        $title['title'] = ucfirst('cursus enseignant');
         if ($this->session->userdata('type') === 'admin') {
 
             $this->load->model('Page_model');
 
             $data['listeprofs'] = $this->Page_model->listeprofs();
 
-            $this->load->view('header');
+            $this->load->view('header', $title);
             $this->load->view('cursusenseignant', $data);
             $this->load->view('footer');
         } else {
@@ -94,7 +99,7 @@ class Page extends CI_Controller
 
     public function cursusenseignantattribution($comptes)
     {
-
+        $title['title'] = ucfirst('attribution cursus enseignant');
         if ($this->session->userdata('type') === 'admin') {
 
             $this->load->model('Page_model');
@@ -106,7 +111,7 @@ class Page extends CI_Controller
 
             $this->Page_model->attribuecursus($idc, $ens);
 
-            $this->load->view('header');
+            $this->load->view('header', $title);
             $this->load->view('cursusenseignantattribution', $data);
             $this->load->view('footer');
         } else {
@@ -116,13 +121,14 @@ class Page extends CI_Controller
 
     public function rechercheprof()
     {
+        $title['title'] = ucfirst('recherche enseignant');
         if ($this->session->userdata('type') === 'admin') {
 
             $this->load->model('Page_model');
 
             $data['rechercheprofs'] = $this->Page_model->rechercheprofs();
 
-            $this->load->view('header');
+            $this->load->view('header', $title);
             $this->load->view('rechercheprof', $data);
             $this->load->view('footer');
         } else {
@@ -132,8 +138,9 @@ class Page extends CI_Controller
 
     public function ajoutprof()
     {
+        $title['title'] = ucfirst('ajout enseignant');
         if ($this->session->userdata('type') === 'admin') {
-            $this->load->view('header');
+            $this->load->view('header', $title);
 
 
             if ($this->input->post()) {
@@ -162,13 +169,14 @@ class Page extends CI_Controller
 
     public function listeprof()
     {
+        $title['title'] = ucfirst('liste enseignant');
         if ($this->session->userdata('type') === 'admin') {
 
             $this->load->model('Page_model');
 
             $data['listeprofs'] = $this->Page_model->listeprofs();
 
-            $this->load->view('header');
+            $this->load->view('header', $title);
             $this->load->view('listeprof', $data);
             $this->load->view('footer');
         } else {
@@ -178,7 +186,8 @@ class Page extends CI_Controller
 
     public function editcompte($comptes)
     {
-        $this->load->view('header');
+        $title['title'] = ucfirst('mon compte');
+        $this->load->view('header', $title);
         $this->load->model('Page_model');
 
         $data['comptes'] = $this->Page_model->find_name($comptes);
@@ -218,13 +227,14 @@ class Page extends CI_Controller
 
     public function recherchecursus()
     {
+        $title['title'] = ucfirst('recherche cursus');
         if ($this->session->userdata('type') === 'admin') {
 
             $this->load->model('Page_model');
 
             $data['recherchecursus'] = $this->Page_model->recherchecursus();
 
-            $this->load->view('header');
+            $this->load->view('header', $title);
             $this->load->view('recherchecursus', $data);
             $this->load->view('footer');
         } else {
@@ -234,8 +244,9 @@ class Page extends CI_Controller
 
     public function ajoutcursus()
     {
+        $title['title'] = ucfirst('ajout cursus');
         if ($this->session->userdata('type') === 'admin') {
-            $this->load->view('header');
+            $this->load->view('header', $title);
 
 
             if ($this->input->post('ajouter')) {
@@ -263,13 +274,14 @@ class Page extends CI_Controller
 
     public function listecursus()
     {
+        $title['title'] = ucfirst('liste cursus');
         if ($this->session->userdata('type') === 'admin') {
 
             $this->load->model('Page_model');
 
             $data['listecursus'] = $this->Page_model->listecursus();
 
-            $this->load->view('header');
+            $this->load->view('header', $title);
             $this->load->view('listecursus', $data);
             $this->load->view('footer');
         } else {
@@ -279,8 +291,9 @@ class Page extends CI_Controller
 
     public function editmatiere($cursus)
     {
+        $title['title'] = ucfirst('modification cursus');
         if ($this->session->userdata('type') === 'admin') {
-            $this->load->view('header');
+            $this->load->view('header', $title);
             $this->load->model('Page_model');
 
             $data['cursus'] = $this->Page_model->find_cursus($cursus);
@@ -321,13 +334,14 @@ class Page extends CI_Controller
 
     public function cursuseleve()
     {
+        $title['title'] = ucfirst('cursus élève');
         if ($this->session->userdata('type') === 'admin') {
 
             $this->load->model('Page_model');
 
             $data['listeeleves'] = $this->Page_model->listeeleves();
 
-            $this->load->view('header');
+            $this->load->view('header', $title);
             $this->load->view('cursuseleve', $data);
             $this->load->view('footer');
         } else {
@@ -337,7 +351,7 @@ class Page extends CI_Controller
 
     public function cursuseleveattribution($comptes)
     {
-
+        $title['title'] = ucfirst('attribution cursus élève');
         if ($this->session->userdata('type') === 'admin') {
 
             $this->load->model('Page_model');
@@ -350,7 +364,7 @@ class Page extends CI_Controller
 
             $this->Page_model->attribuecursuseleve($ide, $cur);
 
-            $this->load->view('header');
+            $this->load->view('header', $title);
             $this->load->view('cursuseleveattribution', $data);
             $this->load->view('footer');
         } else {
@@ -360,13 +374,14 @@ class Page extends CI_Controller
 
     public function rechercheeleve()
     {
+        $title['title'] = ucfirst('recherche élève');
         if ($this->session->userdata('type') === 'admin') {
 
             $this->load->model('Page_model');
 
             $data['rechercheeleve'] = $this->Page_model->rechercheeleve();
 
-            $this->load->view('header');
+            $this->load->view('header', $title);
             $this->load->view('rechercheeleve', $data);
             $this->load->view('footer');
         } else {
@@ -376,13 +391,14 @@ class Page extends CI_Controller
 
     public function listeelevecursus()
     {
+        $title['title'] = ucfirst('liste élèves avec cursus');
         if ($this->session->userdata('type') === 'admin') {
 
             $this->load->model('Page_model');
 
             $data['listeelevecursus'] = $this->Page_model->listeelevecursus();
 
-            $this->load->view('header');
+            $this->load->view('header', $title);
             $this->load->view('listeelevecursus', $data);
             $this->load->view('footer');
         } else {
@@ -392,13 +408,14 @@ class Page extends CI_Controller
 
     public function listeelevesanscursus()
     {
+        $title['title'] = ucfirst('liste élèves sans cursus');
         if ($this->session->userdata('type') === 'admin') {
 
             $this->load->model('Page_model');
 
             $data['listeelevesanscursus'] = $this->Page_model->listeelevesanscursus();
 
-            $this->load->view('header');
+            $this->load->view('header', $title);
             $this->load->view('listeelevesanscursus', $data);
             $this->load->view('footer');
         } else {
@@ -408,13 +425,14 @@ class Page extends CI_Controller
 
     public function rechercheelevefamille()
     {
+        $title['title'] = ucfirst('recherche élève');
         if ($this->session->userdata('type') === 'famille') {
 
             $this->load->model('Page_model');
 
             $data['rechercheelevefamille'] = $this->Page_model->rechercheelevefamille();
 
-            $this->load->view('header');
+            $this->load->view('header', $title);
             $this->load->view('rechercheelevefamille', $data);
             $this->load->view('footer');
         } else {
@@ -424,10 +442,11 @@ class Page extends CI_Controller
 
     public function ajoutelevefamille()
     {
+        $title['title'] = ucfirst('ajout élève');
         if ($this->session->userdata('type') === 'famille') {
             $famille_id = $this->session->userdata('famille_id');
 
-            $this->load->view('header');
+            $this->load->view('header', $title);
 
             if ($this->input->post()) {
                 $post = $this->input->post();
@@ -459,13 +478,14 @@ class Page extends CI_Controller
 
     public function listeeleveattentefamille()
     {
+        $title['title'] = ucfirst('liste élèves en attente');
         if ($this->session->userdata('type') === 'famille') {
 
             $this->load->model('Page_model');
 
             $data['listeeleveattentefamille'] = $this->Page_model->listeeleveattentefamille();
 
-            $this->load->view('header');
+            $this->load->view('header', $title);
             $this->load->view('listeeleveattentefamille', $data);
             $this->load->view('footer');
         } else {
@@ -475,13 +495,14 @@ class Page extends CI_Controller
 
     public function listeelevefamille()
     {
+        $title['title'] = ucfirst('liste élèves famille');
         if ($this->session->userdata('type') === 'famille') {
 
             $this->load->model('Page_model');
 
             $data['listeelevefamille'] = $this->Page_model->listeelevefamille();
 
-            $this->load->view('header');
+            $this->load->view('header', $title);
             $this->load->view('listeelevefamille', $data);
             $this->load->view('footer');
         } else {
@@ -491,13 +512,14 @@ class Page extends CI_Controller
 
     public function affichenotesfamille()
     {
+        $title['title'] = ucfirst('affichage notes');
         if ($this->session->userdata('type') === 'famille') {
 
             $this->load->model('Page_model');
 
             $data['affichenotesfamille'] = $this->Page_model->affichenotesfamille();
 
-            $this->load->view('header');
+            $this->load->view('header', $title);
             $this->load->view('affichenotesfamille', $data);
             $this->load->view('footer');
         } else {
@@ -507,13 +529,14 @@ class Page extends CI_Controller
 
     public function rechercheelevecursusprof()
     {
+        $title['title'] = ucfirst('recherche élèves du cursus');
         if ($this->session->userdata('type') === 'enseignant') {
 
             $this->load->model('Page_model');
 
             $data['rechercheelevecursusprof'] = $this->Page_model->rechercheelevecursusprof();
 
-            $this->load->view('header');
+            $this->load->view('header', $title);
             $this->load->view('rechercheelevecursusprof', $data);
             $this->load->view('footer');
         } else {
@@ -523,13 +546,14 @@ class Page extends CI_Controller
 
     public function listeelevecursusprof()
     {
+        $title['title'] = ucfirst('liste élèves du cursus');
         if ($this->session->userdata('type') === 'enseignant') {
 
             $this->load->model('Page_model');
 
             $data['listeelevecursusprof'] = $this->Page_model->listeelevecursusprof();
 
-            $this->load->view('header');
+            $this->load->view('header', $title);
             $this->load->view('listeelevecursusprof', $data);
             $this->load->view('footer');
         } else {
@@ -539,13 +563,14 @@ class Page extends CI_Controller
 
     public function affichenotesprof()
     {
+        $title['title'] = ucfirst('affichage notes enseignant');
         if ($this->session->userdata('type') === 'enseignant') {
 
             $this->load->model('Page_model');
 
             $data['affichenotesprof'] = $this->Page_model->affichenotesprof();
 
-            $this->load->view('header');
+            $this->load->view('header', $title);
             $this->load->view('affichenotesprof', $data);
             $this->load->view('footer');
         } else {
@@ -555,13 +580,14 @@ class Page extends CI_Controller
 
     public function listecursusprof()
     {
+        $title['title'] = ucfirst('liste des cursus');
         if ($this->session->userdata('type') === 'enseignant') {
 
             $this->load->model('Page_model');
 
             $data['listecursusprof'] = $this->Page_model->listecursusprof();
 
-            $this->load->view('header');
+            $this->load->view('header', $title);
             $this->load->view('listecursusprof', $data);
             $this->load->view('footer');
         } else {
@@ -571,13 +597,14 @@ class Page extends CI_Controller
 
     public function affichenotes()
     {
+        $title['title'] = ucfirst('affichage notes élève');
         if ($this->session->userdata('type') === 'eleve') {
 
             $this->load->model('Page_model');
 
             $data['affichenotes'] = $this->Page_model->affichenotes();
 
-            $this->load->view('header');
+            $this->load->view('header', $title);
             $this->load->view('affichenotes', $data);
             $this->load->view('footer');
         } else {
@@ -587,10 +614,10 @@ class Page extends CI_Controller
 
     public function ajoutcontrole()
     {
-
+        $title['title'] = ucfirst('ajout notes');
         if ($this->session->userdata('type') === 'enseignant') {
 
-            $this->load->view('header');
+            $this->load->view('header', $title);
 
             // $this->form_validation->set_rules('intitule', 'intitule', 'required');
             // $this->form_validation->set_rules('note', 'note', 'required');

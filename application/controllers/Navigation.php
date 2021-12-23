@@ -4,46 +4,52 @@ class Navigation extends CI_Controller
 {
     public function index()
     {
-        $this->load->view('header');
+        $title['title'] = ucfirst('accueil');
+        $this->load->view('header', $title);
         $this->load->view('welcome_message');
         $this->load->view('footer');
     }
 
     public function comptesuspendu()
     {
-        $this->load->view('header');
+        $title['title'] = ucfirst('compte suspendu');
+        $this->load->view('header', $title);
         $this->load->view('video');
         $this->load->view('footer');
     }
 
     public function stats()
     {
+        $title['title'] = ucfirst('statistiques');
         $this->auth->authorized(
             ["admin"],
             "Navigation/login"
         );
-        $this->load->view('header');
+        $this->load->view('header', $title);
         $this->load->view('stats');
         $this->load->view('footer');
     }
 
     public function contact()
     {
-        $this->load->view('header');
+        $title['title'] = ucfirst('contact');
+        $this->load->view('header', $title);
         $this->load->view('contact');
         $this->load->view('footer');
     }
 
     public function news()
     {
-        $this->load->view('header');
+        $title['title'] = ucfirst('news');
+        $this->load->view('header', $title);
         $this->load->view('news');
         $this->load->view('footer');
     }
 
     public function register()
     {
-        $this->load->view('header');
+        $title['title'] = ucfirst('inscription');
+        $this->load->view('header', $title);
 
         if ($this->input->post()) {
             $post = $this->input->post();
@@ -72,10 +78,10 @@ class Navigation extends CI_Controller
         $this->load->view('footer');
     }
 
-    public function welcome_message()
-    {
-        $this->load->view('header');
-        $this->load->view('welcome_message');
-        $this->load->view('footer');
-    }
+    // public function welcome_message()
+    // {
+    //     $this->load->view('header');
+    //     $this->load->view('welcome_message');
+    //     $this->load->view('footer');
+    // }
 }
