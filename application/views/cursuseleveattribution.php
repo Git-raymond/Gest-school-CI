@@ -1,13 +1,8 @@
 <body>
-
     <div class="container-fluid">
-
         <div class="col-lg-12">
-
             <div class="container-fluid">
-
                 <div class="col-lg-12">
-
                     <div class="row">
                         <div class="col-md-6 col-md-offset-3 mx-auto">
                             <div class="box text-center text-primary mb-5">
@@ -50,7 +45,8 @@
                     </div>
                 </div>
             </div>
-
+        </div>
+    </div>
 </body>
 
 </html>

@@ -1,12 +1,9 @@
 <div class="container-fluid">
-
     <div class="col-lg-12">
-
         <div class="row">
             <div class="col-md-6 col-md-offset-3 mx-auto">
                 <div class="box text-center text-primary mb-5">
                     <h3 class="text-warning mt-5">Modification des informations du compte</h3>
-
                     <br>
                     <form method="post">
 
@@ -89,20 +86,12 @@
                                         </div>
                                     </div>
                                 </div>
-
-
                             </div>
-
-
                         </div>
 
-
                     </form>
-
                 </div>
-
             </div>
-
         </div>
     </div>
 </div>
